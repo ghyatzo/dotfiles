@@ -20,6 +20,11 @@ shift + alt - right  : chunkc tiling::window --grid-layout 1:2:1:0:1:1
 # make floating window fill bottom-half of screen
 shift + alt - down   : chunkc tiling::window --grid-layout 2:1:1:1:1:1
 
+cmd + shift - left   : ~/.local/bin/chunk_float.sh move -x
+cmd + shift - right  : ~/.local/bin/chunk_float.sh move +x
+cmd + shift - up     : ~/.local/bin/chunk_float.sh move -y
+cmd + shift - down   : ~/.local/bin/chunk_float.sh move +y
+
 # change layout of desktop
 alt - b : chunkc tiling::desktop --layout bsp
 alt - m : chunkc tiling::desktop --layout monocle
