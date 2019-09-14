@@ -1,0 +1,1 @@
+.config/oh-my-zsh/.zprofile

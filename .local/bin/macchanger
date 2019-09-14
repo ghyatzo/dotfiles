@@ -1,0 +1,28 @@
+#!/bin/bash
+
+newmac="$1"
+interface="$2"
+
+if [ $1 = "-h" ] || [ $1 = "--help" ]; then
+  echo "Usage: macchanger [new mac adress] [interface]"
+  echo "  If not specified the new mac address will be random."
+  echo "  If not specified the interface defaults to 'en0'."
+  echo "  You can use 'macchanger default' to reset the mac adress to"
+  echo "    the original one."
+  exit 0
+fi
+
+if [ -z $1 ]; then
+  newmac=$(openssl rand -hex 6 | sed 's/\(..\)/\1:/g' | sed 's/:$//g')
+elif [ $1 = "default" ]; then
+  newmac="3c:15:c2:c7:23:7c"
+fi
+
+if [ -z $2 ]; then
+  interface="en0"
+fi
+
+echo "interface: $interface"
+echo "current mac:  $(ifconfig en0 | awk '/ether/ {print $2}')"
+sudo ifconfig ${interface} ether ${newmac}
+echo "mac address changed to:  $newmac"

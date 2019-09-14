@@ -1,0 +1,8 @@
+#!/bin/bash
+
+file="$1"
+
+
+# [ "${file:0:1}" == "/" ] || file="${PWD}/$file"
+
+NVIM_LISTEN_ADDRES="/tmp$file" nvim "$file"

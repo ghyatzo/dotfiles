@@ -1,0 +1,7 @@
+skhd        ~/.skhdrc
+chunkwm     ~/.chunkwmrc
+zsh         ~/.zshrc
+zprofile    ~/.zprofile
+kitty       ~/.config/kitty/kitty.conf
+aliases     ~/.config/aliasrc
+

@@ -1,0 +1,84 @@
+#  Aliases
+
+# Easier Navigation:
+alias -- -="cd -"              # Goes back to the previously visited dir
+alias ..="cd .."              # Goes back up one directory
+alias ...="cd ../.."		  # Goes back up two directories
+alias ....="cd ../../.."	  # Goes back up three directories
+# Print $PATH entries on separate lines
+alias path='echo -e ${PATH//:/\\n}'
+
+# nvim and Vim
+alias vim="NVIM_LISTEN_ADDRESS=/tmp/vim.sock nvim"
+
+# Shortcuts
+alias drive="cd $HOME/Google\ Drive"
+alias dl="cd $HOME/Downloads"
+alias desk="cd $HOME/Desktop"
+alias docs="cd $HOME/Documents"
+alias books="cd $BOOKS"
+alias scripts="cd $HOME/.local/bin"
+alias src='cd $HOME/.local/src'
+
+alias hs='history | grep'
+
+alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.local/src/dotfiles/ --work-tree=$HOME'
+# ls formatting
+alias lt="ls -AGltr"        # List all file, last modified order
+alias ll="ls -AGl"          # List all file
+alias lz="ls -AGlSskh"       # List all file, sorted by size
+alias lsd="ls -Gd .*"
+
+# Always enable colored 'grep' output
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Enable aliases to be sudo'ed
+alias sudo='sudo '
+alias _='sudo'
+alias please='sudo'
+
+# Get week number, day number, day of the week, month, year
+alias week='date +%V'
+alias day='date +%j'
+alias dayOfTheWeek='date +%A'
+alias dayOfTheMonth='date +%d'
+alias month='date +%B'
+alias year='date +%G'
+alias slashDate='date +%D'
+
+
+# Show active network interfaces
+alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
+
+# macOS has no md5sum, so use md5 as a fallback
+command -v md5sum > /dev/null || alias md5sum="md5"
+# macOS has no sha1sum, so use shasum as a fallback
+command -v sha1sum > /dev/null || alias sha1sum="shasum"
+
+
+# Show/Hide hidden files in Finder
+alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Show/Hide all Desktop icons (useful when presenting)
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+
+
+# ---- CUSTOM STUFF ----
+alias edit="micro"
+
+# Updates installed Ruby gems, Homebrew formulas, npm and their installed packages
+alias update='echo "++ UPDATING HOMEBREW ++"; brew update; brew upgrade; brew cleanup; echo "++ UPDATING NPM ++"; npm install npm -g; npm update -g; echo "++ UPDATING RUBY ++"; sudo gem update --system; sudo gem update; sudo gem cleanup'
+
+# IP adresses
+alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias localip='ipconfig getifaddr en0'
+
+# updatedb
+alias updatedb='/usr/libexec/locate.updatedb'
+
+# Recursively delete '.DS_Store' files
+alias DScleanup="find . -type f -name '*.DS_Store' -ls -delete"

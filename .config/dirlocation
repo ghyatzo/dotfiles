@@ -1,0 +1,8 @@
+books       "~/Google\ Drive/Utrecht\ Master/Books"
+config      "~/.config"
+vim         "~/.config/nvim/"
+oh-my-zsh   "~/.config/oh-my-zsh"
+download    "~/Downloads"
+drive       "~/Google\ Drive"
+docs        "~/Documents"
+
