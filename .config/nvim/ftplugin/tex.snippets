@@ -1,0 +1,436 @@
+# Tex file snippets
+global !p
+texMathZones = ['texMathZone'+x for x in ['A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z']]
+
+texIgnoreMathZones = ['texMathText']
+
+texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+
+ignore = texIgnoreMathZoneIds[0]
+
+def math():
+	synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+	try:
+		first = next(i for i in reversed(synstackids) if i in texIgnoreMathZoneIds or i in texMathZoneIds)
+		return first != ignore
+	except StopIteration:
+		return False
+endglobal
+
+
+# --- Templates ---
+snippet _homework "homework template" bA
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{url}
+
+\usepackage{parskip}
+\usepackage{emptypage}
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb, mathtools}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage{bm}
+
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\newcommand\C{\ensuremath{\mathbb{C}}}
+
+% Put x\to \infty below \lim
+\let\svlim\lim\def\lim{\svlim\limits}
+
+% make implies and impledby shorter
+\let\implies\Rightarrow
+\let\impliedby\Leftarrow
+\let\iff\Leftrightarrow
+\let\epsilon\varepsilon
+
+\usepackage{stmaryrd} % for \lightning
+\newcommand\contra{\scalebox{1.5}{$\lightning$}}
+
+\theoremstyle{definition}
+\newtheorem*{exercise}{Exercise}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\author{Camillo Schenone}
+\title{%
+	$1 \\\\
+	\large $2}
+
+\begin{document}
+\maketitle
+$0
+
+\end{document}
+endsnippet
+
+# --- Environments ---
+snippet beg "section" bA
+\\begin{$1}
+	$0
+\\end{$1}
+endsnippet
+snippet sec "section" bA
+\section{$1}
+$0
+endsnippet
+
+snippet ssec "subsec" bA
+\subsection{$1}
+$0
+endsnippet
+
+snippet par "paragraph" bA
+\paragraph{$1}
+$0
+endsnippet
+
+snippet spar "subparagraph" bA
+\subparagraph{$1}
+$0
+endsnippet
+
+snippet 2cases "piecewise function" bA
+\begin{cases}
+	$1 & $2 \\\\
+	$3 & $4 
+\end{cases}
+$0
+endsnippet
+
+snippet 3cases "piecewise function" bA
+\begin{cases}
+	$1 & $2 \\\\
+	$3 & $4 \\\\
+	$5 & $6
+\end{cases}
+$0
+endsnippet
+
+# --- Parenthesis ---
+snippet lr( "left( right)" iA
+\left( ${1:${VISUAL}} \right) $0
+endsnippet
+
+snippet lr| "left| right|" iA
+\left| ${1:${VISUAL}} \right| $0
+endsnippet
+
+snippet lr[ "left[ right]" iA
+\left[ ${1:${VISUAL}} \right] $0
+endsnippet
+
+snippet lr{ "left{ right}" iA
+\left\\{ ${1:${VISUAL}} \right\\} $0
+endsnippet
+
+snippet lra "leftangle rangle" iA
+\left<${1:${VISUAL}} \right>$0
+endsnippet
+
+# --- Order&Logic operators ---
+snippet => "implies" Ai
+\implies 
+endsnippet
+
+snippet =< "impliedby" Ai
+\impliedby 
+endsnippet
+
+context "math()"
+snippet iff "iff" iA
+\iff 
+endsnippet
+
+snippet == "equals" Ai
+&= $1 \\\\
+endsnippet
+
+snippet != "notequals" iA
+\neq 
+endsnippet
+
+snippet <= "leq" iA
+\leq 
+endsnippet
+
+snippet >= "geq" iA
+\geq 
+endsnippet
+
+context "math()"
+snippet EE "exists" iA
+\exists 
+endsnippet
+
+context "math()"
+snippet AA "forall" iA
+\quad\forall 
+endsnippet
+
+context "math()"
+snippet -> "to" iA
+\to 
+endsnippet
+
+context "math()"
+snippet <-> "lra" iA
+\leftrightarrow 
+endsnippet
+
+context "math()"
+snippet !> "mapsto" iA
+\mapsto 
+endsnippet
+
+context "math()"
+snippet incl "inclusion" iA
+\xhookrightarrow\{\}
+endsnippet
+
+context "math()"
+snippet comp "composition" iA
+\circ 
+endsnippet
+
+context "math()"
+snippet iso "isomorphic" iA
+\cong 
+endsnippet
+
+context "math()"
+snippet hom "homotopic" iA
+\simeq 
+endsnippet
+
+context "math()"
+snippet \\\ "setminus" iA
+\setminus 
+endsnippet
+
+
+# --- Subscript ---
+context "math()"
+snippet '([A-Za-z])(\d)' "auto subscript" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet '([A-Za-z])_(\d\d)' "auto subscript double digit" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+snippet __ "subscript" iA
+_{$1}$0
+endsnippet
+
+context "math()"
+snippet xn "x_n" iA
+x_{n}
+endsnippet
+
+context "math()"
+snippet xk "x_k" iA
+x_{k}
+endsnippet
+
+context "math()"
+snippet yn "y_n" iA
+y_{n}
+endsnippet
+
+context "math()"
+snippet xi "x_i" iA
+x_{i}
+endsnippet
+
+context "math()"
+snippet yi "y_i" iA
+y_{i}
+endsnippet
+context "math()"
+
+snippet xj "x_j" iA
+x_{j}
+endsnippet
+
+
+# --- Superscript
+context "math()"
+snippet td "to the ..." iA
+^{$1}$0
+endsnippet
+
+context "math()"
+snippet rd "to the ..." iA
+^{($1)}$0
+endsnippet
+
+context "math()"
+snippet invs "inverse" iA
+^{-1}
+endsnippet
+
+context "math()"
+snippet compl "complement" iA
+^{c}
+endsnippet
+
+
+# --- Sets ---
+context "math()"
+snippet set "set" wA
+\\{$1\\} $0
+endsnippet
+
+context "math()"
+snippet cc "subset" Ai
+\subset 
+endsnippet
+
+snippet nin "not in " iA
+\not\in 
+endsnippet
+
+context "math()"
+snippet inn "in " iA
+\in 
+endsnippet
+
+
+# --- Operations & Elementary functions
+snippet ** "cdot" iA
+\cdot 
+endsnippet
+
+snippet norm "norm" iA
+\|$1\|$0
+endsnippet
+
+context "math()"
+snippet xx "cross prod" iA
+\times 
+endsnippet
+
+context "math()"
+snippet '(?<!\\)(sin|cos|cot|csc|ln|log|exp|star|perp)' "ln" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+context "math()"
+snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)' "ln" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+context "math()"
+snippet dsum "direct sum" iA
+\oplus 
+endsnippet
+
+
+
+# --- Big Notations
+context "math()"
+snippet // "fraction" iA
+\\frac{$1}{$2}$0
+endsnippet
+
+context "math()"
+snippet sum "sum" wA
+\sum_{${1:i}=${2:1}}^{${3:\infty}} ${4:a_n x^n}
+endsnippet
+
+context "math()"
+snippet lim "lim" wA
+\lim_{${1:n} \to ${2:\infty}} $0
+endsnippet
+
+context "math()"
+snippet part "d/dx" w
+\frac{\partial $1}{\partial $2} $0
+endsnippet
+
+context "math()"
+snippet seqn "sequence" i
+(${1:x}_${2:n})_{{$3:$2}\\in${4:\\N}}$0
+endsnippet
+
+context "math()"
+snippet intg "integrazioni" wA
+\int_{${1:-\infty}}^{$2:\infty}} ${3:${VISUAL}} $0
+endsnippet
+
+context "math()"
+snippet bdsum "big direct sum" wA
+\bigoplus_{$1}^{$2}$3 $0
+endsnippet
+
+
+# ---- TEXT AND STUFF ----
+snippet mk "inline math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', ',', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
+endsnippet
+
+snippet dm "display math" wA
+\[
+$1
+.\] $0
+endsnippet
+
+context "math()"
+snippet tt "text" iA
+\text{$1}$0
+endsnippet
+
+snippet ttit "text italics" wA
+\textit{$1} $0
+endsnippet
+
+snippet ttbf "text bold" wA
+\textbf{$1} $0
+endsnippet
+
+context "math()"
+snippet "bar" "bar" riA
+\overline{$1}$0
+endsnippet
+
+context "math()"
+snippet "hat" "hat" riA
+\hat{$1}$0
+endsnippet
+
+context "math()"
+snippet '([a-zA-Z])bar' "bar" riA
+\overline{`!p snip.rv = match.group(1)`}
+endsnippet
+
+context "math()"
+snippet '([a-zA-Z])hat' "hat" riA
+\hat{`!p snip.rv = match.group(1)`}
+endsnippet
+
+
+snippet ooo "infinity" iA
+\infty
+endsnippet
+
+snippet ... "dots" iA
+\ldots
+endsnippet
+
+
+
+# TO BE CONTINUED, aggiungi corsivo
