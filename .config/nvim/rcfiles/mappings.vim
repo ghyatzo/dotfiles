@@ -31,18 +31,47 @@ nnoremap Q @q
 nnoremap 0 ^
 nnoremap ^ 0
 
+" correct the spelling with <C-L>
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
+" toggle syntax on or off
+map <F2> :if exists("g:syntax_on") <Bar>
+        \   syntax off <Bar>
+        \ else <Bar>
+        \   syntax enable <Bar>
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+        \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+        \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+" ---- PLUGINS
+
 " Toggle goyo
 nnoremap <leader>f :Goyo<CR>
 nnoremap <leader>F :Goyo \| Limelight!!<CR>
 autocmd! User GoyoLeave Limelight!
+    \ | highlight Conceal guifg=#87afaf guibg=NONE gui=NONE ctermfg=109 ctermbg=NONE cterm=NONE
 let g:limelight_default_coefficient = 0.8
 
 " Nerdtree specific
 map <leader>\ :NERDTreeToggle<CR>
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" Lf File manager plugin
+let g:lf_map_keys=0
+let g:NERDTreeHijackNetrw = 0 "use lf instead of NERDTREE for when opening a directory
+let g:lf_replace_netrw = 1
+map <leader>l :Lf<CR>
+map <leader>t :LfNewTab<CR>
+
+
+
+
+
+
+" ---- MISC
+
 " automatically deletes all trailing whitespace on save
-autocmd BufWritePost * %s/\s\+$//e
+let ftToIgnore = ['snippets']
+autocmd BufWritePost * if index(ftToIgnore, &ft) < 0 | %s/\s\+$//e
 
 augroup vimrcEx
   autocmd!

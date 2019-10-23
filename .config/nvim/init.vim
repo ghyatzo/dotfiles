@@ -47,12 +47,19 @@ Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-entire'
 Plug 'scrooloose/nerdtree'
 
+"LF file manager vim plugin
+Plug 'ptzz/lf.vim'
+Plug 'rbgrouleff/bclose.vim'
+
 " Goyo (soft-wrap substitute)
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
-" Vim-Latex
-Plug 'vim-latex/vim-latex'
+" Vimtex
+Plug 'lervag/vimtex'
+
+" UltiSnips
+Plug 'SirVer/ultisnips'
 
 " --- !!! COLOR SCHEMES !!! ---
 Plug 'rudrab/vim-coogle'
@@ -101,7 +108,7 @@ set relativenumber
 
 let g:is_posix=1
 
-set list listchars=tab:»·,trail:·,nbsp:· 
+set list listchars=tab:»·,trail:·,nbsp:·
 autocmd FileType * setlocal
   \ formatoptions-=r " dont automatically insert the current comment leader after hitting ,Enter> in insert mode
   \ formatoptions-=o  " dont automaticalli insert current comment leader after hitting o or O
@@ -130,6 +137,10 @@ set hlsearch
 set ignorecase
 set smartcase
 
+" ---- SPELLING ----
+setlocal spell
+set spelllang=it,en_gb
+
 " ---- VISUALS ---
 set colorcolumn=80
 set sidescroll=5      " when scrolling horizzontally move 5 columns at a time
@@ -143,6 +154,8 @@ set diffopt+=iwhite   "ignore whitespace only changes
 set termguicolors
 let g:despacio_sunset = 1
 colorscheme despacio
+" fix concealment
+highlight Conceal guifg=#87afaf guibg=NONE gui=NONE ctermfg=109 ctermbg=NONE cterm=NONE
 
 " automatically rebalance windows on resize
 autocmd VimResized * :wincmd =
@@ -162,11 +175,23 @@ set path-=/usr/include "fix
 set complete+=i,kspell
 
 
-
-
+" ---- PLUGIN SPECIFIG ----
 " Goyo line number enable
 autocmd! User GoyoEnter nested set number
 autocmd! User GoyoEnter nested set relativenumber
+" vimtex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='skim'
+let g:vimtex_quickfix_mode=0
+" concealment of redundant syntax unless im on the line.
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+" ultisnips
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "ftplugin"]
 
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 

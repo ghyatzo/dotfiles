@@ -16,8 +16,10 @@ def math():
 		return first != ignore
 	except StopIteration:
 		return False
-endglobal
 
+def nomath():
+	return not math()
+endglobal
 
 # --- Templates ---
 snippet _homework "homework template" bA
@@ -40,6 +42,8 @@ snippet _homework "homework template" bA
 \renewcommand\O{\ensuremath{\emptyset}}
 \newcommand\Q{\ensuremath{\mathbb{Q}}}
 \newcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand\K{\ensuremath{\mathbb{K}}}
+\newcommand\F{\ensuremath{\mathbb{F}}}
 
 % Put x\to \infty below \lim
 \let\svlim\lim\def\lim{\svlim\limits}
@@ -77,8 +81,14 @@ snippet beg "section" bA
 	$0
 \\end{$1}
 endsnippet
+
 snippet sec "section" bA
 \section{$1}
+$0
+endsnippet
+
+snippet seC "section" bA
+\section*{$1}
 $0
 endsnippet
 
@@ -87,6 +97,12 @@ snippet ssec "subsec" bA
 $0
 endsnippet
 
+snippet sseC "subsec" bA
+\subsection*{$1}
+$0
+endsnippet
+
+context "nomath()"
 snippet par "paragraph" bA
 \paragraph{$1}
 $0
@@ -119,12 +135,20 @@ snippet lr( "left( right)" iA
 \left( ${1:${VISUAL}} \right) $0
 endsnippet
 
+snippet () "()" iA
+($1)$0
+endsnippet
+
 snippet lr| "left| right|" iA
 \left| ${1:${VISUAL}} \right| $0
 endsnippet
 
 snippet lr[ "left[ right]" iA
 \left[ ${1:${VISUAL}} \right] $0
+endsnippet
+
+snippet [] "[]" iA
+[$1]$0
 endsnippet
 
 snippet lr{ "left{ right}" iA
@@ -172,7 +196,7 @@ endsnippet
 
 context "math()"
 snippet AA "forall" iA
-\quad\forall 
+\,\forall 
 endsnippet
 
 context "math()"
@@ -295,6 +319,22 @@ snippet cc "subset" Ai
 \subset 
 endsnippet
 
+context "math()"
+snippet DD "superset" Ai
+\supset 
+endsnippet
+
+context "math()"
+snippet c= "subset" Ai
+\subseteq 
+endsnippet
+
+context "math()"
+snippet D= "superset" Ai
+\supseteq 
+endsnippet
+
+context "math()"
 snippet nin "not in " iA
 \not\in 
 endsnippet
@@ -310,8 +350,19 @@ snippet ** "cdot" iA
 \cdot 
 endsnippet
 
+context "math()"
+snippet part "partial" iA
+\partial
+endsnippet
+
+context "math()"
 snippet norm "norm" iA
-\|$1\|$0
+\| $1\| $0
+endsnippet
+
+context "math()"
+snippet abs "absolute value" iA
+\mid $1\mid $0
 endsnippet
 
 context "math()"
@@ -320,7 +371,12 @@ snippet xx "cross prod" iA
 endsnippet
 
 context "math()"
-snippet '(?<!\\)(sin|cos|cot|csc|ln|log|exp|star|perp)' "ln" rwA
+snippet ox "tensor product" iA
+\otimes 
+endsnippet
+
+context "math()"
+snippet '(?<!\\)(sin|cos|cot|csc|ln|log|exp|star|perp|max|sup)' "ln" rwA
 \\`!p snip.rv = match.group(1)`
 endsnippet
 
@@ -344,7 +400,7 @@ endsnippet
 
 context "math()"
 snippet sum "sum" wA
-\sum_{${1:i}=${2:1}}^{${3:\infty}} ${4:a_n x^n}
+\sum_{${1:i}}^{${2:\infty}} ${3:a}
 endsnippet
 
 context "math()"
@@ -353,13 +409,8 @@ snippet lim "lim" wA
 endsnippet
 
 context "math()"
-snippet part "d/dx" w
-\frac{\partial $1}{\partial $2} $0
-endsnippet
-
-context "math()"
-snippet seqn "sequence" i
-(${1:x}_${2:n})_{{$3:$2}\\in${4:\\N}}$0
+snippet seq "sequence" i
+\\left(${1:x_n}\\right)_{${2}}$0
 endsnippet
 
 context "math()"
@@ -368,15 +419,19 @@ snippet intg "integrazioni" wA
 endsnippet
 
 context "math()"
-snippet bdsum "big direct sum" wA
+snippet Dsum "big direct sum" wA
 \bigoplus_{$1}^{$2}$3 $0
 endsnippet
 
+context "math()"
+snippet Ox "big tensor product" wA
+\bigotimes_{$1}^{$2}$3 $0
+endsnippet
 
 # ---- TEXT AND STUFF ----
 snippet mk "inline math" wA
 $${1}$`!p
-if t[2] and t[2][0] not in [',', ',', '?', '-', ' ']:
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -385,7 +440,7 @@ endsnippet
 
 snippet dm "display math" wA
 \[
-$1
+	$1
 .\] $0
 endsnippet
 
@@ -408,20 +463,29 @@ snippet "bar" "bar" riA
 endsnippet
 
 context "math()"
+snippet "line" "underline" riA
+\underline{$1}$0
+endsnippet
+
+context "math()"
 snippet "hat" "hat" riA
 \hat{$1}$0
 endsnippet
 
-context "math()"
-snippet '([a-zA-Z])bar' "bar" riA
-\overline{`!p snip.rv = match.group(1)`}
-endsnippet
+# context "math()"
+# snippet '([a-zA-Z])bar' "bar" riA
+# \overline{`!p snip.rv = match.group(1)`}
+# endsnippet
+
+# context "math()"
+# snippet '([a-zA-Z])hat' "hat" riA
+# \hat{`!p snip.rv = match.group(1)`}
+# endsnippet
 
 context "math()"
-snippet '([a-zA-Z])hat' "hat" riA
-\hat{`!p snip.rv = match.group(1)`}
+snippet "  " "space" iA
+\, 
 endsnippet
-
 
 snippet ooo "infinity" iA
 \infty

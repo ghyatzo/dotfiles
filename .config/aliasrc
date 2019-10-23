@@ -13,16 +13,23 @@ alias vim="NVIM_LISTEN_ADDRESS=/tmp/vim.sock nvim"
 
 # Shortcuts
 alias drive="cd $HOME/Google\ Drive"
-alias dl="cd $HOME/Downloads"
+alias D="cd $HOME/Downloads"
 alias desk="cd $HOME/Desktop"
-alias docs="cd $HOME/Documents"
+alias d="cd $HOME/Documents"
 alias books="cd $BOOKS"
 alias scripts="cd $HOME/.local/bin"
 alias src='cd $HOME/.local/src'
 
-alias hs='history | grep'
+# quickly edit files
+alias cfa="vim $XDG_CONFIG_HOME/aliasrc"
+alias cfz="vim $HOME/.zshrc"
+alias cfv="vim $XDG_CONFIG_HOME/nvim/init.vim"
+alias cfy="vim $HOME/.yabairc"
+alias cfs="vim $HOME/.skhdrc"
 
+alias hs='history | grep'
 alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.local/src/dotfiles/ --work-tree=$HOME'
+
 # ls formatting
 alias lt="ls -AGltr"        # List all file, last modified order
 alias ll="ls -AGl"          # List all file
@@ -37,7 +44,7 @@ alias egrep='egrep --color=auto'
 # Enable aliases to be sudo'ed
 alias sudo='sudo '
 alias _='sudo'
-alias please='sudo'
+alias please='sudo '
 
 # Get week number, day number, day of the week, month, year
 alias week='date +%V'

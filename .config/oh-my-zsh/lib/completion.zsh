@@ -12,6 +12,7 @@ setopt always_to_end
 # should this be in keybindings?
 bindkey -M menuselect '^o' accept-and-infer-next-history
 zstyle ':completion:*:*:*:*:*' menu select
+_comp_options+=(globdots)   #include hidden files
 
 # case insensitive (all), partial-word and substring completion
 if [[ "$CASE_SENSITIVE" = true ]]; then
