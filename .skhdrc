@@ -35,7 +35,12 @@ alt - 0 : yabai -m space --focus 10
 
 # create and destroy
 ctrl + alt - n : yabai -m space --create
-ctrl + alt - w : yabai -m space --destroy
+ctrl + alt - w : (yabai -m space --focus prev || yabai -m space --focus next) \
+    && yabai -m space recent --destroy
+# ctrl + alt - w : yabai -m space --focus \
+#     "$(yabai -m query --spaces --display \
+#         | jq \
+#         'nth(index(map(select(.focused == 1))) + 1).index (reverse | nth(index(map(select(.focused == 1))) +1).index) 0')" && yabai -m space recent --destroy
 
 # move
 shift + ctrl + alt - z : yabai -m space --move prev

@@ -18,7 +18,7 @@ alias desk="cd $HOME/Desktop"
 alias d="cd $HOME/Documents"
 alias books="cd $BOOKS"
 alias scripts="cd $HOME/.local/bin"
-alias src='cd $HOME/.local/src'
+alias src="cd $HOME/.local/src"
 
 # quickly edit files
 alias cfa="vim $XDG_CONFIG_HOME/aliasrc"
@@ -29,6 +29,7 @@ alias cfs="vim $HOME/.skhdrc"
 
 alias hs='history | grep'
 alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.local/src/dotfiles/ --work-tree=$HOME'
+alias clera='clear'
 
 # ls formatting
 alias lt="ls -AGltr"        # List all file, last modified order

@@ -9,42 +9,30 @@
 let mapleader = ","
 
 call plug#begin('~/.config/nvim/plugged')
-" A Vim Plugin for Lively Previewing LaTeX PDF Output
-"Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
-" Vim Plugin that adds the 'dot' repeat feature to plugins
-Plug 'tpope/vim-repeat'
-" Vim Plugin that adds surrounding characters recognition.
-" syntax:
-  " <command>+s+<old><new> : change the first occurence of <old> around an object
-  "                          and substitute it with <new>, keyword: "surrouding"
-  " ys+<text_obj><entity>  : surround the specified <text_obj> with <entity>
-  "                          keyword: "yes, surround ..."
-Plug 'tpope/vim-surround'
-" Vim Plugin that allows to comment out entire text-objects
-" syntax:
-  " gcc           : comments a line (counts)
-  " gc+<text_obj> : comments <text_obj>
-  " [VISUAL] gc   : comments the visual selection
-Plug 'tpope/vim-commentary'
-" VIm Plugin that adds a command to copy directly to the system clipboard
-" instead of the internal buffers.
-" syntax:
-  " cp+<text_obj>  : copy <text_obj> in the system clipboard
-  " cP             : copy entire line
-  " cv             : paste syst-clipb to the next line
-  " otherwise cmd-c and cmd-v still works
-Plug 'christoomey/vim-system-copy'
-" Adds support to various text_objects
-Plug 'kana/vim-textobj-user'
+Plug 'tpope/vim-repeat' "'dot' repeat to other plugins
+Plug 'tpope/vim-surround' "surrounding characters recognition
+" syntax: <cmd>s<old>[<new>] reference the surrounding <old> char, <cmd>: d, c (others ?)
+"         ys<txt_obj><char> surround <txt_obj> with <char>
+
+Plug 'tpope/vim-commentary' "multiple line comment
+" syntax: gcc comment current line
+"         gc<txt_obj> comment txt_obj
+"         [Visual]gc  comment selection
+Plug 'christoomey/vim-system-copy' "copy to and from system clipboard
+" syntax: cp<txt_obj> copy <text_obj>
+"         cP          copy entire line
+"         cv          paste syst-clipb to the next line
+"         otherwise cmd-c and cmd-v still works
+Plug 'kana/vim-textobj-user' " Adds support to various text_objects
   " line: al (w/ whitespaces) il (w/o whitespaces)
   " indent: i  (same intentation or more) I  (only same indentation)
   "         ai (doesn't skip empty lines) ii (stops at first empty line)
   " entire: ae (whole buffer) ie (whole buffer without leading and trailing empty
   "             lines)
-Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-entire'
+" Plug 'kana/vim-textobj-line'
+" Plug 'kana/vim-textobj-entire'
 Plug 'scrooloose/nerdtree'
 
 "LF file manager vim plugin
@@ -61,12 +49,18 @@ Plug 'lervag/vimtex'
 " UltiSnips
 Plug 'SirVer/ultisnips'
 
+" gitGutter
+Plug 'airblade/vim-gitgutter'
+
+" Julia-vim, syntax and more!
+Plug 'JuliaLang/julia-vim'
+
 " --- !!! COLOR SCHEMES !!! ---
 Plug 'rudrab/vim-coogle'
-Plug 'aradunovic/perun.vim'
-Plug 'kadekillary/subtle_solo'
-Plug 'nightsense/cosmic_latte'
-Plug 'lifepillar/vim-solarized8'
+" Plug 'aradunovic/perun.vim'
+" Plug 'kadekillary/subtle_solo'
+" Plug 'nightsense/cosmic_latte'
+" Plug 'lifepillar/vim-solarized8'
 Plug 'AlessandroYorba/despacio'
 call plug#end()
 
@@ -85,6 +79,7 @@ set undolevels=500
 set shell=/usr/local/bin/zsh
 set clipboard=unnamedplus
 set mouse=a
+set updatetime=100
 
 set showcmd   " display incomplete commands
 set laststatus=2  "always display the statusline
@@ -148,8 +143,7 @@ set sidescrolloff=5   " when scrolling horizzontally always show 5 columns after
 
 set splitbelow
 set splitright
-set diffopt+=vertical "always use vertical diffs
-set diffopt+=iwhite   "ignore whitespace only changes
+set diffopt=filler,vertical,iwhite "ignore whitespace only changes and always use vertical diffs
 
 set termguicolors
 let g:despacio_sunset = 1

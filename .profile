@@ -34,5 +34,5 @@ export LESS_TERMCAP_us=$'\E[1;32m'
 export BOOKS=$HOME/Google\ Drive/Master/Books
 export COURSES=$HOME/Current-Courses
 export SCRIPTS="$HOME/.local/bin/"
-export ATOM_HOME="$CONFIGDIR/atom"
+#export ATOM_HOME="$CONFIGDIR/atom"
 

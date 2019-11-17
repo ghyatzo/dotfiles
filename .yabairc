@@ -48,7 +48,7 @@ yabai -m config window_shadow float
 
 # window opacity
 # example: render all unfocused windows with 90% opacity
-yabai -m config window_opacity on
+yabai -m config window_opacity off
 yabai -m config window_opacity_duration 0
 yabai -m config active_window_opacity 1.0
 yabai -m config normal_window_opacity 1.0
@@ -58,9 +58,10 @@ yabai -m config normal_window_opacity 1.0
 #  - colors for borders are in the format AARRGGBB with hex values
 #  - active means focused window, normal means unfocused window, insert means selected window
 yabai -m config window_border off
-yabai -m config window_border_width 4
+yabai -m config window_border_radius 0
+yabai -m config window_border_width 3
 yabai -m config active_window_border_color  0xff775759
-yabai -m config normal_window_border_color 0xff505050
+yabai -m config normal_window_border_color 0x00505050
 yabai -m config insert_window_border_color  0xffd75f5f
 
 
@@ -70,9 +71,9 @@ yabai -m config status_bar_text_font "Helvetica Neue:Bold:12.0"
 yabai -m config status_bar_icon_font "Font Awesome 5 Free:Solid:12.0"
 yabai -m config status_bar_background_color 0xff282828
 yabai -m config status_bar_foreground_color 0xffc8c4bd
-# yabai -m config status_bar_space_icon_strip  . .. ... :: ::. ::: .::: :::: ::::. -- -. -: -:. -:: -::.
+yabai -m config status_bar_space_icon_strip  ⠂ ⠒ ⠓ ⠫ ⠯ ⡻ ⣽ ⣿
 # yabai -m config status_bar_space_icon_strip  ⭕ ⭕ ⭕ ⭕ ⭕ ⭕ ⭕ ⭕ ⭕ ⭕ ⭕ ⭕ ⭕ ⭕ ⭕ ⭕
-yabai -m config status_bar_space_icon_strip     
+# yabai -m config status_bar_space_icon_strip  I:  II:  III:  IV:
 yabai -m config status_bar_power_icon_strip "" ""
 yabai -m config status_bar_space_icon   ""
 yabai -m config status_bar_clock_icon   ""
@@ -80,8 +81,8 @@ yabai -m config status_bar_clock_icon   ""
 
 # --- Signals
 # Flashfocus emulation, on window focus quickly change the opacity
-yabai -m signal --add event=window_focused label="flashfocus" \
-    action='/Users/ghyatzo/.local/bin/flashfocus $YABAI_WINDOW_ID'
+# yabai -m signal --add event=window_focused label="flashfocus" \
+    # action='/Users/ghyatzo/.local/bin/flashfocus $YABAI_WINDOW_ID'
 
 # --- Rules
 
