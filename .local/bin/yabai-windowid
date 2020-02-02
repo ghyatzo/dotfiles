@@ -1,0 +1,2 @@
+#!/bin/sh
+yabai -m query --windows --window | awk -F':' '/"id"/{print $2}' | sed -n 's/\,//p'

@@ -53,3 +53,7 @@ bindkey -s '^o' 'lfcd\n'
 # bindkey -M menuselect 'j' vi-down-line-or-history
 
 #kitty + complete setup zsh | source /dev/stdin
+
+#automatically generate useful gitignores
+function gitignore() { curl -sLw n https://www.gitignore.io/api/macos,$@ ;}
+

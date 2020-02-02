@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# script to emulate the behaviour of flashfocus with yabai.
+# it uses the internal method window_alpha_fade, can be subject to change in the future
+# window_alpha_face window_id opacity duration
+
+# this script is to be called via a yabai window_focused signal
+
+wid=$1
+duration=0.1
+alpha=0.90
+
+# here's the funky part
+echo "window_alpha_fade $wid $alpha 0.15" | nc -U /tmp/yabai-sa_$USER.socket
+sleep 0.15
+echo "window_alpha_fade $wid 1 $duration" | nc -U /tmp/yabai-sa_$USER.socket
+
