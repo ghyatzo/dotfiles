@@ -1,1 +1,1 @@
-.config/oh-my-zsh/.zprofile
+.profile

@@ -21,7 +21,7 @@ nnoremap <C-s> :w<CR>
 
 " copy and paste shortcuts
 vnoremap <C-y> "+y
-map <C-p> "+p
+map <C-v> "+p
 
 " Q for Ex mode is useless. This will run the macro in q register
 nnoremap Q @q

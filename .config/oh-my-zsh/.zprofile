@@ -1,1 +1,1 @@
-/Users/ghyatzo/.profile
+../../.profile

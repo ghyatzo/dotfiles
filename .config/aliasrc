@@ -9,16 +9,15 @@ alias ....="cd ../../.."	  # Goes back up three directories
 alias path='echo -e ${PATH//:/\\n}'
 
 # nvim and Vim
-alias vim="NVIM_LISTEN_ADDRESS=/tmp/vim.sock nvim"
+alias vim="NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim"
 
 # Shortcuts
-alias drive="cd $HOME/Google\ Drive"
-alias D="cd $HOME/Downloads"
+alias drive="cd $DRIVE"
+alias d="cd $HOME/Downloads"
 alias desk="cd $HOME/Desktop"
-alias d="cd $HOME/Documents"
-alias books="cd $BOOKS"
+alias D="cd $HOME/Documents"
 alias scripts="cd $HOME/.local/bin"
-alias src="cd $HOME/.local/src"
+alias dev="cd $HOME/.local/dev"
 
 # quickly edit files
 alias cfa="vim $XDG_CONFIG_HOME/aliasrc"
@@ -26,9 +25,10 @@ alias cfz="vim $HOME/.zshrc"
 alias cfv="vim $XDG_CONFIG_HOME/nvim/init.vim"
 alias cfy="vim $HOME/.yabairc"
 alias cfs="vim $HOME/.skhdrc"
+alias cfp="vim $HOME/.profile"
 
 alias hs='history | grep'
-alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.local/src/dotfiles/ --work-tree=$HOME'
+alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.local/dev/dotfiles/ --work-tree=$HOME'
 alias clera='clear'
 
 # ls formatting
@@ -46,6 +46,7 @@ alias egrep='egrep --color=auto'
 alias sudo='sudo '
 alias _='sudo'
 alias please='sudo '
+#alias htop='sudo htop' # htop requires root to run properly, and i trust it...
 
 # Get week number, day number, day of the week, month, year
 alias week='date +%V'
@@ -76,7 +77,6 @@ alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && 
 
 
 # ---- CUSTOM STUFF ----
-alias edit="micro"
 
 # Updates installed Ruby gems, Homebrew formulas, npm and their installed packages
 alias update='echo "++ UPDATING HOMEBREW ++"; brew update; brew upgrade; brew cleanup; echo "++ UPDATING NPM ++"; npm install npm -g; npm update -g; echo "++ UPDATING RUBY ++"; sudo gem update --system; sudo gem update; sudo gem cleanup'
@@ -89,4 +89,4 @@ alias localip='ipconfig getifaddr en0'
 alias updatedb='/usr/libexec/locate.updatedb'
 
 # Recursively delete '.DS_Store' files
-alias DScleanup="find . -type f -name '*.DS_Store' -ls -delete"
+alias DSCleanup="find . -type f -name '*.DS_Store' -ls -delete"

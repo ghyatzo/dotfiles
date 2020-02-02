@@ -1,1 +1,1 @@
-/Users/ghyatzo/.zshrc
+../../.zshrc

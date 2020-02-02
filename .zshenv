@@ -1,1 +1,0 @@
-.config/oh-my-zsh/.zshenv

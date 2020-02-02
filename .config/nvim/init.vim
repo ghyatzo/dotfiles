@@ -122,8 +122,8 @@ set breakindent
 
 set textwidth=100 "text width for comment wrapping and goyo width
 set wrapmargin=0  " wrap a little bit before the window margin
-autocmd FileType * setlocal
-  \ formatoptions-=t  " enable text autowrap
+" autocmd FileType * setlocal
+"   \ formatoptions-=t  " enable text autowrap
 
 
 " ----- SEARCH ----

@@ -77,6 +77,7 @@ ctrl + alt - f : yabai -m space --layout float
 
 # focus
 # (dwm style nav commands)
+alt - r : yabai -m window --focus recent
 alt - j : yabai -m window --focus prev
 alt - k : yabai -m window --focus next
 alt - h : yabai -m window --focus first
@@ -84,30 +85,30 @@ alt - l : yabai -m window --focus last
 # (one-hand style nav commands)
 alt - w : yabai -m window --focus north
 alt - s : yabai -m window --focus south
-alt - a : yabai -m window --focus east
-alt - d : yabai -m window --focus west
+alt - a : yabai -m window --focus west
+alt - d : yabai -m window --focus east
 # yabai -m window --focus mouse
 
 # move (swap - doesnt change the window layout)
-shift + alt - j : yabai -m window --swap prev
-shift + alt - k : yabai -m window --swap next
-shift + alt - h : yabai -m window --swap first
-shift + alt - l : yabai -m window --swap last
-shift + alt - w : yabai -m window --swap north
-shift + alt - s : yabai -m window --swap south
-shift + alt - a : yabai -m window --swap east
-shift + alt - d : yabai -m window --swap west
+shift + alt - j : yabai -m window --swap recent; yabai -m window --focus recent
+shift + alt - k : yabai -m window --swap next; yabai -m window --focus recent
+shift + alt - h : yabai -m window --swap first; yabai -m window --focus recent
+shift + alt - l : yabai -m window --swap last; yabai -m window --focus recent
+shift + alt - w : yabai -m window --swap north; yabai -m window --focus recent
+shift + alt - s : yabai -m window --swap south; yabai -m window --focus recent
+shift + alt - a : yabai -m window --swap west; yabai -m window --focus recent
+shift + alt - d : yabai -m window --swap east; yabai -m window --focus recent
 # yabai -m window --swap mouse
 
 # move (warp - change the window layout)
-ctrl + shift + alt - j : yabai -m window --warp prev
-ctrl + shift + alt - k : yabai -m window --warp next
-ctrl + shift + alt - h : yabai -m window --warp first
-ctrl + shift + alt - l : yabai -m window --warp last
-ctrl + shift + alt - w : yabai -m window --warp north
-ctrl + shift + alt - s : yabai -m window --warp south
-ctrl + shift + alt - a : yabai -m window --warp east
-ctrl + shift + alt - d : yabai -m window --warp west
+ctrl + shift + alt - j : yabai -m window --warp recent; yabai -m window --focus recent
+ctrl + shift + alt - k : yabai -m window --warp next; yabai -m window --focus recent
+ctrl + shift + alt - h : yabai -m window --warp first; yabai -m window --focus recent
+ctrl + shift + alt - l : yabai -m window --warp last; yabai -m window --focus recent
+ctrl + shift + alt - w : yabai -m window --warp north; yabai -m window --focus recent
+ctrl + shift + alt - s : yabai -m window --warp south; yabai -m window --focus recent
+ctrl + shift + alt - a : yabai -m window --warp west; yabai -m window --focus recent
+ctrl + shift + alt - d : yabai -m window --warp east; yabai -m window --focus recent
 # yabai -m window --warp mouse
 
 # move (to other spaces)
@@ -157,5 +158,5 @@ alt - tab : yabai -m window --toggle sticky
 # yabai -m window --resize abs:500:800
 
 # --- OPEN STUFF
-cmd + shift - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
-
+cmd + shift - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance --instance-group=1 --directory ~
+cmd - 0x32 : /Applications/Kitty.app/Contents/MacOS/kitty --title notepad --single-instance --instance-group=2 --hold --directory ~

@@ -57,12 +57,13 @@ yabai -m config normal_window_opacity 1.0
 #  - width has unit 1pt
 #  - colors for borders are in the format AARRGGBB with hex values
 #  - active means focused window, normal means unfocused window, insert means selected window
-yabai -m config window_border off
+yabai -m config window_border on
 yabai -m config window_border_radius 0
-yabai -m config window_border_width 3
-yabai -m config active_window_border_color  0xff775759
-yabai -m config normal_window_border_color 0x00505050
-yabai -m config insert_window_border_color  0xffd75f5f
+yabai -m config window_border_width 2
+yabai -m config active_window_border_color  0xffc27000
+yabai -m config normal_window_border_color 0xff292929
+yabai -m config insert_window_border_color  0xffc27000
+yabai -m config active_window_border_topmost off
 
 
 # --- Statusbar
@@ -88,7 +89,15 @@ yabai -m config status_bar_clock_icon   ""
 
 yabai -m rule --add label="spotify-fullscreen" \
     app="^Spotify$" \
-    native-fullscreen=on
+    native-fullscreen=true
+yabai -m rule --add label="notepad-terminal-dimentions" \
+    app="^kitty" \
+    title="notepad" \
+    manage=off \
+    sticky=on \
+    topmost=on \
+    border=on \
+    grid=4:4:1:1:2:2
 
 
 # --- Rules --- Disable Manage/Fix opacity
@@ -114,5 +123,9 @@ yabai -m rule --add label="system-preference-float" \
     app="^Preferenze\ di\ Sistema$" \
     manage=off \
     opacity=1
-
+yabai -m rule --add label="julia-terminal-plots" \
+    app="GKSTerm" \
+    title="GKSTerm" \
+    manage=off \
+    opacity=1
 echo "yabai config loaded..."
