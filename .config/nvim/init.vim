@@ -31,8 +31,6 @@ Plug 'kana/vim-textobj-user' " Adds support to various text_objects
   " entire: ae (whole buffer) ie (whole buffer without leading and trailing empty
   "             lines)
 Plug 'kana/vim-textobj-indent'
-" Plug 'kana/vim-textobj-line'
-" Plug 'kana/vim-textobj-entire'
 Plug 'scrooloose/nerdtree'
 
 "LF file manager vim plugin
@@ -43,17 +41,15 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
-" Vimtex
 Plug 'lervag/vimtex'
-
-" UltiSnips
 Plug 'SirVer/ultisnips'
-
-" gitGutter
 Plug 'airblade/vim-gitgutter'
 
 " Julia-vim, syntax and more!
 Plug 'JuliaLang/julia-vim'
+
+" Plug 'kana/vim-textobj-entire'
+Plug 'lifepillar/vim-mucomplete'
 
 " --- !!! COLOR SCHEMES !!! ---
 Plug 'rudrab/vim-coogle'
@@ -167,9 +163,19 @@ set path-=/usr/include "fix
 
 " set where to look when completing
 set complete+=i,kspell
-
-
 " ---- PLUGIN SPECIFIG ----
+
+" " vim-mucomplete settings
+set completeopt+=menuone
+set completeopt+=noselect
+imap <expr> <right> mucomplete#extend_fwd("\<right>")
+set shortmess+=c
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#no_mappings = 1 "let me do the mappings to work with ultisnipts (see below)
+if !hasmapto('<plug>(MUcompleteBwd)', 'i')
+    imap <unique> <s-tab> <plug>(MUcompleteBwd)
+endif
+
 " Goyo line number enable
 autocmd! User GoyoEnter nested set number
 autocmd! User GoyoEnter nested set relativenumber
@@ -182,10 +188,34 @@ set conceallevel=1
 let g:tex_conceal='abdmg'
 
 " ultisnips
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+let g:UltiSnipsExpandTrigger = "<f5>"        " Do not use <tab>
+let g:UltiSnipsJumpForwardTrigger = "<c-b>"  " Do not use <c-j>
+" let g:UltiSnipsExpandTrigger='<tab>'
+" let g:UltiSnipsJumpForwardTrigger='<tab>'
+" let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "ftplugin"]
+
+" compatibility with i_CTRL-X_CTRL-K behaviour
+inoremap <c-x><c-k> <c-x><c-k>
+
+""""compatibility with mucomplete
+let g:ulti_expand_or_jump_res = 0
+fun! TryUltiSnips()
+    if !pumvisible() "with popup menu open let tab move down
+        call UltiSnips#ExpandSnippetOrJump()
+    endif
+    return ''
+endf
+fun! TryMUcomplete()
+    return g:ulti_expand_or_jump_res ? "" : "\<plug>(MUcompleteFwd)"
+endf
+
+inoremap <plug>(TryUlti) <c-r>=TryUltiSnips()<cr>
+imap <expr> <silent> <plug>(TryMU) TryMUcomplete()
+imap <expr> <silent> <tab> "\<plug>(TryUlti)\<plug>(TryMU)"
+
+inoremap <silent> <expr> <plug>MyCR mucomplete#ultisnips#expand_snippet("\<cr>")
+imap <cr> <plug>MyCR
 
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 

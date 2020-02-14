@@ -59,7 +59,7 @@ map <leader>\ :NERDTreeToggle<CR>
 let g:lf_map_keys=0
 let g:NERDTreeHijackNetrw = 0 "use lf instead of NERDTREE for when opening a directory
 let g:lf_replace_netrw = 1
-map <leader>l :Lf<CR>
+map <leader>lf :Lf<CR>
 map <leader>t :LfNewTab<CR>
 
 

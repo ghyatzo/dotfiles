@@ -23,7 +23,7 @@ endglobal
 
 # --- Templates ---
 snippet _homework "homework template" bA
-\documentclass[a4paper]{article}
+\documentclass[a4paper]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
@@ -35,6 +35,7 @@ snippet _homework "homework template" bA
 \usepackage{tikz-cd}
 \usepackage{mathrsfs}
 \usepackage{bm}
+\usepackage{wrapfig} % allows for text wrap around figure
 
 \newcommand\N{\ensuremath{\mathbb{N}}}
 \newcommand\R{\ensuremath{\mathbb{R}}}
@@ -58,7 +59,13 @@ snippet _homework "homework template" bA
 \newcommand\contra{\scalebox{1.5}{$\lightning$}}
 
 \theoremstyle{definition}
-\newtheorem*{exercise}{Exercise}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{result}{Result}[chapter]
+\newtheorem{example}{Example}[chapter]
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -73,6 +80,22 @@ snippet _homework "homework template" bA
 $0
 
 \end{document}
+endsnippet
+
+snippet _figure "figure template" bA
+\begin{figure}[$1]
+	\centering
+	$2
+	\caption{$4}
+\end{figure}
+$0
+endsnippet
+
+snippet _subfig "subfigure" iA
+\begin{subfigure}[$1]{${2:0.4\textwidth}}
+	\includegraphics[${3:width=\textwidth}]{$4}
+	\label{fig:$5}
+\end{subfigure}$0
 endsnippet
 
 # --- Environments ---
@@ -331,7 +354,7 @@ snippet ** "cdot" iA
 endsnippet
 
 context "math()"
-snippet part "partial" iA
+snippet pdel "partial" iA
 \partial
 endsnippet
 
@@ -353,6 +376,16 @@ endsnippet
 context "math()"
 snippet ox "tensor product" iA
 \otimes 
+endsnippet
+
+context "math()"
+snippet uu "cup" iA
+\cup
+endsnippet
+
+context "math()"
+snippet pp "cap" iA
+\cap
 endsnippet
 
 context "math()"
@@ -408,6 +441,16 @@ snippet Ox "big tensor product" wA
 \bigotimes_{$1}^{$2}$3 $0
 endsnippet
 
+
+context "math()"
+snippet UU "big cup" iA
+\bigcup
+endsnippet
+
+context "math()"
+snippet PP "big cap" iA
+\cap
+endsnippet
 # ---- TEXT AND STUFF ----
 snippet mk "inline math" wA
 $${1}$`!p
@@ -450,6 +493,16 @@ endsnippet
 context "math()"
 snippet "hat" "hat" riA
 \hat{$1}$0
+endsnippet
+
+# context "math()"
+# snippet "dot" "dot" riA
+# \dot{$1}$0
+# endsnippet
+
+context "math()"
+snippet '([a-zA-Z])dot' "dot" riA
+\dot{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
 # context "math()"
