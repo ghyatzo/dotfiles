@@ -1,0 +1,32 @@
+### Basic Window manager functionality
+dwm
+flashfocus-git
+st (custom build)
+sxiv
+dmenu
+dunst
+neovim
+sxhkd
+xcompmgr
+xwallpaper
+
+### Basic System Functionality
+zathura
+zathura-djvu
+zathura-pdf-mupdf
+zathura-ps
+ranger
+ntfs-3g
+neofetch
+git
+cups
+cups-pdf
+cronie
+bluez
+bluez-utils
+yay
+
+
+#### Fonts
+ttf-iosevka
+ttf-hack
