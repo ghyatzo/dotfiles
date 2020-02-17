@@ -62,10 +62,36 @@ let g:lf_replace_netrw = 1
 map <leader>lf :Lf<CR>
 map <leader>t :LfNewTab<CR>
 
+" vim-mucomplete
+let g:mucomplete#no_mappings = 1 "let me do the mappings to work with ultisnipts (see below)
+imap <expr> <right> mucomplete#extend_fwd("\<right>")
+imap <expr> <left> mucomplete#extend_bwd("\<left>")
+if !hasmapto('<plug>(MUcompleteBwd)', 'i')
+    imap <unique> <s-tab> <plug>(MUcompleteBwd)
+endif
 
+" ultisnipts
+" compatibility with i_CTRL-X_CTRL-K behaviour
+inoremap <c-x><c-k> <c-x><c-k>
 
+"compatibility with mucomplete
+let g:ulti_expand_or_jump_res = 0
+fun! TryUltiSnips()
+    if !pumvisible() "with popup menu open let tab move down
+        call UltiSnips#ExpandSnippetOrJump()
+    endif
+    return ''
+endf
+fun! TryMUcomplete()
+    return g:ulti_expand_or_jump_res ? "" : "\<plug>(MUcompleteFwd)"
+endf
 
+inoremap <plug>(TryUlti) <c-r>=TryUltiSnips()<cr>
+imap <expr> <silent> <plug>(TryMU) TryMUcomplete()
+imap <expr> <silent> <tab> "\<plug>(TryUlti)\<plug>(TryMU)"
 
+inoremap <silent> <expr> <plug>MyCR mucomplete#ultisnips#expand_snippet("\<cr>")
+imap <cr> <plug>MyCR
 
 " ---- MISC
 

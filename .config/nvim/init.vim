@@ -77,7 +77,7 @@ set clipboard=unnamedplus
 set mouse=a
 set updatetime=100
 
-set showcmd   " display incomplete commands
+set showcmd       "display incomplete commands
 set laststatus=2  "always display the statusline
 set autowrite
 set autoread
@@ -85,9 +85,9 @@ set autoread
 " ---- FORMATTING ----
 set tabstop=4   " how many spaces is the tab character worth
 set softtabstop=4 " ask how many spaces pressing tab adds and how many pressing backspace removes
-set shiftwidth=4  " how manu spaces is a level of indentation
 set expandtab
 set smarttab
+set shiftwidth=4  " how manu spaces is a level of indentation
 set shiftround
 set autoindent
 set nojoinspaces " dont insert two spaces after dots after a join
@@ -100,14 +100,15 @@ set relativenumber
 let g:is_posix=1
 
 set list listchars=tab:»·,trail:·,nbsp:·
-autocmd FileType * setlocal
-  \ formatoptions-=r " dont automatically insert the current comment leader after hitting ,Enter> in insert mode
-  \ formatoptions-=o  " dont automaticalli insert current comment leader after hitting o or O
-  \ formatoptions+=j  " remove comment leader when joining two comment lines
-  " beware, c format option is still active
-  " that mean that even with soft wrap
-  " comments still get hard wrapped to new lines
-  " after 80 chars.
+autocmd FileType * setlocal formatoptions-=ro
+autocmd FileType * setlocal formatoptions+=j
+" r: dont automatically insert current comment leader after hitting o or O
+" o: dont automatically insert the current comment leader after hitting ,Enter> in insert mode
+" j: remove comment leader when joining two comment lines
+" beware, c format option is still active
+" that mean that even with soft wrap
+" comments still get hard wrapped to new lines
+" after 80 chars.
 
 " ---- WRAPPING -----
 " wrapping: soft wrap (using Goyo)
@@ -133,7 +134,7 @@ setlocal spell
 set spelllang=it,en_gb
 
 " ---- VISUALS ---
-set colorcolumn=80
+set colorcolumn=100
 set sidescroll=5      " when scrolling horizzontally move 5 columns at a time
 set sidescrolloff=5   " when scrolling horizzontally always show 5 columns after the current cursor position
 
@@ -158,7 +159,7 @@ set wildmode=list:longest,list:full
 
 " search down into subfolders (max depth n) otherwise lags so fucking much
 " tab-completion for file related stuff
-set path+=**5
+set path+=**3
 set path-=/usr/include "fix
 
 " set where to look when completing
@@ -167,55 +168,34 @@ set complete+=i,kspell
 
 " " vim-mucomplete settings
 set completeopt+=menuone
-set completeopt+=noselect
-imap <expr> <right> mucomplete#extend_fwd("\<right>")
+set completeopt+=noinsert,noselect
 set shortmess+=c
 let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#no_mappings = 1 "let me do the mappings to work with ultisnipts (see below)
-if !hasmapto('<plug>(MUcompleteBwd)', 'i')
-    imap <unique> <s-tab> <plug>(MUcompleteBwd)
-endif
+let g:mucomplete#tab_when_no_results = 1
+let g:mucomplete#completion_delay =1
+
 
 " Goyo line number enable
 autocmd! User GoyoEnter nested set number
 autocmd! User GoyoEnter nested set relativenumber
+
 " vimtex
 let g:tex_flavor='latex'
 let g:vimtex_view_method='skim'
 let g:vimtex_quickfix_mode=0
+let g:vimtex_complete_enabled=1
 " concealment of redundant syntax unless im on the line.
 set conceallevel=1
-let g:tex_conceal='abdmg'
+let g:tex_conceal='abdmgs'
 
 " ultisnips
 let g:UltiSnipsExpandTrigger = "<f5>"        " Do not use <tab>
 let g:UltiSnipsJumpForwardTrigger = "<c-b>"  " Do not use <c-j>
 " let g:UltiSnipsExpandTrigger='<tab>'
 " let g:UltiSnipsJumpForwardTrigger='<tab>'
-" let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "ftplugin"]
 
-" compatibility with i_CTRL-X_CTRL-K behaviour
-inoremap <c-x><c-k> <c-x><c-k>
-
-""""compatibility with mucomplete
-let g:ulti_expand_or_jump_res = 0
-fun! TryUltiSnips()
-    if !pumvisible() "with popup menu open let tab move down
-        call UltiSnips#ExpandSnippetOrJump()
-    endif
-    return ''
-endf
-fun! TryMUcomplete()
-    return g:ulti_expand_or_jump_res ? "" : "\<plug>(MUcompleteFwd)"
-endf
-
-inoremap <plug>(TryUlti) <c-r>=TryUltiSnips()<cr>
-imap <expr> <silent> <plug>(TryMU) TryMUcomplete()
-imap <expr> <silent> <tab> "\<plug>(TryUlti)\<plug>(TryMU)"
-
-inoremap <silent> <expr> <plug>MyCR mucomplete#ultisnips#expand_snippet("\<cr>")
-imap <cr> <plug>MyCR
 
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 

@@ -1,20 +1,22 @@
 set autochdir
 
 " Wrap commands
-set wrap
+set nowrap
 set linebreak
 let &showbreak=""
 set breakindent
 set nolist
 
-set wrapmargin=0
+set wrapmargin=10
 set textwidth=0
+
+let g:goyo_width = 100
 
 " Goyo remove line numbers
 autocmd User GoyoEnter nested set relativenumber
 
 " formatting options
-set formatoptions=atcq1jpw
+set formatoptions=atq1jpw
 " a: enables auto-format: texwidth, if 0 use 79, or width of window.
 " t: enable auto format for text
 " c: enable auto format for comments
@@ -43,4 +45,29 @@ noremap <leader>p    :w<CR> :silent exe "! vim_open_skim.sh " . shellescape(expa
 " Compile the document
 noremap <leader>b    :! vim_build_tex.sh %<CR>
 
-" Snippets
+"reformat lines {{{
+fun! TeX_fmt()
+    if (getline(".") != "")
+        let save_cursor = getpos(".")
+        let op_wrapscan = &wrapscan
+        set nowrapscan
+        let par_begin = '^\(%D\)\=\s*\($\|\\label\|\\begin\|\\end\|\\[\|\\]\|\\\(sub\)*section\>\|\\item\>\|\\NC\>\|\\blank\>\|\\noindent\>\)'
+        let par_end   = '^\(%D\)\=\s*\($\|\\begin\|\\end\|\\[\|\\]\|\\place\|\\\(sub\)*section\>\|\\item\>\|\\NC\>\|\\blank\>\)'
+        try
+            exe '?'.par_begin.'?+'
+        catch /E384/
+            1
+        endtry
+        norm V
+        try
+            exe '/'.par_end.'/-'
+        catch /E385/
+            $
+        endtry
+        norm gq
+        let &wrapscan = op_wrapscan
+        call setpos('.', save_cursor)
+    endif
+endfun
+
+nmap Q :call tex_fmt()<CR>
