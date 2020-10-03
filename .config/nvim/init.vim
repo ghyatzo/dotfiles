@@ -42,6 +42,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 Plug 'lervag/vimtex'
+" Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 
@@ -53,10 +54,10 @@ Plug 'lifepillar/vim-mucomplete'
 
 " --- !!! COLOR SCHEMES !!! ---
 Plug 'rudrab/vim-coogle'
-" Plug 'aradunovic/perun.vim'
-" Plug 'kadekillary/subtle_solo'
-" Plug 'nightsense/cosmic_latte'
-" Plug 'lifepillar/vim-solarized8'
+Plug 'aradunovic/perun.vim'
+Plug 'kadekillary/subtle_solo'
+Plug 'nightsense/cosmic_latte'
+Plug 'lifepillar/vim-solarized8'
 Plug 'AlessandroYorba/despacio'
 call plug#end()
 
@@ -114,27 +115,24 @@ autocmd FileType * setlocal formatoptions+=j
 " wrapping: soft wrap (using Goyo)
 set wrap  " make vim wrap the text
 set linebreak " wrap only at line bounduaries
-let &showbreak="\\ "
+let &showbreak="\ "
 set breakindent
 
-set textwidth=100 "text width for comment wrapping and goyo width
-set wrapmargin=0  " wrap a little bit before the window margin
-" autocmd FileType * setlocal
-"   \ formatoptions-=t  " enable text autowrap
-
+set textwidth=0
 
 " ----- SEARCH ----
 set incsearch   " enables incremental search, showing matches while still typing
 set hlsearch
 set ignorecase
 set smartcase
+set noshowmode
 
 " ---- SPELLING ----
 setlocal spell
 set spelllang=it,en_gb
 
 " ---- VISUALS ---
-set colorcolumn=100
+"set colorcolumn=90
 set sidescroll=5      " when scrolling horizzontally move 5 columns at a time
 set sidescrolloff=5   " when scrolling horizzontally always show 5 columns after the current cursor position
 
@@ -143,10 +141,13 @@ set splitright
 set diffopt=filler,vertical,iwhite "ignore whitespace only changes and always use vertical diffs
 
 set termguicolors
-let g:despacio_sunset = 1
 colorscheme despacio
+let g:despacio_sunset = 1
 " fix concealment
 highlight Conceal guifg=#87afaf guibg=NONE gui=NONE ctermfg=109 ctermbg=NONE cterm=NONE
+
+"look on your left
+highlight CursorLineNr guifg=Orange
 
 " automatically rebalance windows on resize
 autocmd VimResized * :wincmd =
@@ -164,9 +165,14 @@ set path-=/usr/include "fix
 
 " set where to look when completing
 set complete+=i,kspell
-" ---- PLUGIN SPECIFIG ----
 
-" " vim-mucomplete settings
+
+
+" ---- PLUGIN SPECIFIG ----
+" python
+autocmd VimEnter * let g:python3_host_prog = system('which python')
+
+" vim-mucomplete settings
 set completeopt+=menuone
 set completeopt+=noinsert,noselect
 set shortmess+=c
@@ -174,28 +180,36 @@ let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#tab_when_no_results = 1
 let g:mucomplete#completion_delay =1
 
+let g:mucomplete#chains = {
+    \ 'default' : ['path', 'omni', 'keyn', 'uspl'],
+    \ 'vim' : ['path', 'cmd', 'keyn'],
+    \ 'tex' : ['path', 'keyp', 'ulti', 'uspl']
+    \ }
 
-" Goyo line number enable
-autocmd! User GoyoEnter nested set number
-autocmd! User GoyoEnter nested set relativenumber
+" Lf file manager
+let g:lf_map_keys=0
+let g:NERDTreeHijackNetrw=0 "use lf instead of nerd tree when opening a directory
+let g:lf_replace_netrw=1
+
+" Goyo and limelight
+" let g:goyo_width = '80%'
+let g:limelight_default_coefficient = 0.8
+
+autocmd! User GoyoEnter set nu rnu
+autocmd! User GoyoLeave Limelight!
+    \ | highlight Conceal guifg=#87afaf guibg=NONE gui=NONE ctermfg=109 ctermbg=NONE cterm=NONE
+
 
 " vimtex
-let g:tex_flavor='latex'
 let g:vimtex_view_method='skim'
 let g:vimtex_quickfix_mode=0
 let g:vimtex_complete_enabled=1
-" concealment of redundant syntax unless im on the line.
-set conceallevel=1
-let g:tex_conceal='abdmgs'
 
 " ultisnips
 let g:UltiSnipsExpandTrigger = "<f5>"        " Do not use <tab>
 let g:UltiSnipsJumpForwardTrigger = "<c-b>"  " Do not use <c-j>
-" let g:UltiSnipsExpandTrigger='<tab>'
-" let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "ftplugin"]
-
 
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 

@@ -23,53 +23,8 @@ endglobal
 
 # --- Templates ---
 snippet _homework "homework template" bA
-\documentclass[a4paper]{report}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{textcomp}
-\usepackage{url}
-
-\usepackage{parskip}
-\usepackage{emptypage}
-\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb, mathtools}
-\usepackage{tikz-cd}
-\usepackage{mathrsfs}
-\usepackage{bm}
-\usepackage{wrapfig} % allows for text wrap around figure
-
-\newcommand\N{\ensuremath{\mathbb{N}}}
-\newcommand\R{\ensuremath{\mathbb{R}}}
-\newcommand\Z{\ensuremath{\mathbb{Z}}}
-\renewcommand\O{\ensuremath{\emptyset}}
-\newcommand\Q{\ensuremath{\mathbb{Q}}}
-\newcommand\C{\ensuremath{\mathbb{C}}}
-\newcommand\K{\ensuremath{\mathbb{K}}}
-\newcommand\F{\ensuremath{\mathbb{F}}}
-
-% Put x\to \infty below \lim
-\let\svlim\lim\def\lim{\svlim\limits}
-
-% make implies and impledby shorter
-\let\implies\Rightarrow
-\let\impliedby\Leftarrow
-\let\iff\Leftrightarrow
-\let\epsilon\varepsilon
-
-\usepackage{stmaryrd} % for \lightning
-\newcommand\contra{\scalebox{1.5}{$\lightning$}}
-
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[chapter]
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{proposition}{Proposition}[chapter]
-\newtheorem{lemma}{Lemma}[chapter]
-\newtheorem{corollary}{Corollary}[chapter]
-\newtheorem{result}{Result}[chapter]
-\newtheorem{example}{Example}[chapter]
-
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-
+\documentclass[a4paper]{amsart}
+\input{/Users/ghyatzo/.config/preamble.tex}
 \author{Camillo Schenone}
 \title{%
 	$1 \\\\
@@ -85,16 +40,16 @@ endsnippet
 snippet _figure "figure template" bA
 \begin{figure}[$1]
 	\centering
-	$2
-	\caption{$4}
+	\includegraphics[width=0.8\textwidth]{$2}
+	\caption{$3}
 \end{figure}
 $0
 endsnippet
 
 snippet _subfig "subfigure" iA
-\begin{subfigure}[$1]{${2:0.4\textwidth}}
-	\includegraphics[${3:width=\textwidth}]{$4}
-	\label{fig:$5}
+\begin{subfigure}[$1]{0.4\textwidth}
+	\includegraphics[width=\textwidth]{$2}
+	\label{fig:$3}
 \end{subfigure}$0
 endsnippet
 

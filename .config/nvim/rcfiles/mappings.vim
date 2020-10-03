@@ -4,11 +4,11 @@
 nnoremap j gj
 nnoremap k gk
 
-" Change Escape key
-inoremap jk <Esc>
-inoremap jj <Esc>
-inoremap kj <Esc>
-inoremap kk <Esc>
+" " Change Escape key
+" inoremap jk <Esc>
+" inoremap jj <Esc>
+" inoremap kj <Esc>
+" inoremap kk <Esc>
 
 " shortcuts to navigate between split windows easily
 map <C-h> <C-w>h
@@ -42,39 +42,33 @@ map <F2> :if exists("g:syntax_on") <Bar>
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
         \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
         \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-" ---- PLUGINS
 
+" ---- PLUGINS
 " Toggle goyo
 nnoremap <leader>f :Goyo<CR>
 nnoremap <leader>F :Goyo \| Limelight!!<CR>
-autocmd! User GoyoLeave Limelight!
-    \ | highlight Conceal guifg=#87afaf guibg=NONE gui=NONE ctermfg=109 ctermbg=NONE cterm=NONE
-let g:limelight_default_coefficient = 0.8
 
 " Nerdtree specific
 map <leader>\ :NERDTreeToggle<CR>
-	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Lf File manager plugin
-let g:lf_map_keys=0
-let g:NERDTreeHijackNetrw = 0 "use lf instead of NERDTREE for when opening a directory
-let g:lf_replace_netrw = 1
 map <leader>lf :Lf<CR>
 map <leader>t :LfNewTab<CR>
 
 " vim-mucomplete
 let g:mucomplete#no_mappings = 1 "let me do the mappings to work with ultisnipts (see below)
-imap <expr> <right> mucomplete#extend_fwd("\<right>")
-imap <expr> <left> mucomplete#extend_bwd("\<left>")
+"imap <expr> <right> mucomplete#extend_fwd("\<right>")
+"imap <expr> <left> mucomplete#extend_bwd("\<left>")
 if !hasmapto('<plug>(MUcompleteBwd)', 'i')
     imap <unique> <s-tab> <plug>(MUcompleteBwd)
 endif
 
-" ultisnipts
-" compatibility with i_CTRL-X_CTRL-K behaviour
+    " ultisnipts
+    " compatibility with i_CTRL-X_CTRL-K behaviour
 inoremap <c-x><c-k> <c-x><c-k>
 
-"compatibility with mucomplete
+    "compatibility with mucomplete
 let g:ulti_expand_or_jump_res = 0
 fun! TryUltiSnips()
     if !pumvisible() "with popup menu open let tab move down
@@ -92,6 +86,9 @@ imap <expr> <silent> <tab> "\<plug>(TryUlti)\<plug>(TryMU)"
 
 inoremap <silent> <expr> <plug>MyCR mucomplete#ultisnips#expand_snippet("\<cr>")
 imap <cr> <plug>MyCR
+
+" " vim-latex-live-preview
+" nmap <leader>ll :LLPStartPreview<CR>
 
 " ---- MISC
 

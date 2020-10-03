@@ -9,7 +9,7 @@ alias ....="cd ../../.."	  # Goes back up three directories
 alias path='echo -e ${PATH//:/\\n}'
 
 # nvim and Vim
-alias vim="NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim"
+alias nvim="NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim"
 
 # Shortcuts
 alias drive="cd $DRIVE"
@@ -20,15 +20,15 @@ alias scripts="cd $HOME/.local/bin"
 alias dev="cd $HOME/.local/dev"
 
 # quickly edit files
-alias cfa="vim $XDG_CONFIG_HOME/aliasrc"
-alias cfz="vim $HOME/.zshrc"
-alias cfv="vim $XDG_CONFIG_HOME/nvim/init.vim"
-alias cfy="vim $HOME/.yabairc"
-alias cfs="vim $HOME/.skhdrc"
-alias cfp="vim $HOME/.profile"
+alias cfa="nvim $XDG_CONFIG_HOME/aliasrc"
+alias cfz="nvim $HOME/.zshrc"
+alias cfv="nvim $XDG_CONFIG_HOME/nvim/init.vim"
+alias cfy="nvim $XDG_CONFIG_HOME/yabai/yabairc"
+alias cfs="nvim $HOME/.skhdrc"
+alias cfp="nvim $HOME/.profile"
 
 alias hs='history | grep'
-alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.local/dev/dotfiles/ --work-tree=$HOME'
+alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.local/src/dotfiles/ --work-tree=$HOME'
 alias clera='clear'
 
 # ls formatting
@@ -79,7 +79,12 @@ alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && 
 # ---- CUSTOM STUFF ----
 
 # Updates installed Ruby gems, Homebrew formulas, npm and their installed packages
-alias update='echo "++ UPDATING HOMEBREW ++"; brew update; brew upgrade; brew cleanup; echo "++ UPDATING NPM ++"; npm install npm -g; npm update -g; echo "++ UPDATING RUBY ++"; sudo gem update --system; sudo gem update; sudo gem cleanup'
+alias update='echo "++ UPDATING HOMEBREW ++"
+/usr/local/bin/brew update && brew upgrade && brew cleanup && pip install --upgrade pynvim
+echo "++ UPDATING NPM ++"
+/usr/local/bin/npm install npm -g && npm update -g
+echo "++ UPDATING RUBY ++"
+sudo gem update --system && sudo gem update && sudo gem cleanup'
 
 # IP adresses
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
@@ -90,3 +95,6 @@ alias updatedb='/usr/libexec/locate.updatedb'
 
 # Recursively delete '.DS_Store' files
 alias DSCleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+# Lets pyenv and Homebrew to play nice with eachother. Otherwise, any python dependent package from homebrew might be compiled against a python version managed by pyenv.
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'

@@ -1,22 +1,19 @@
 set autochdir
 
 " Wrap commands
-set nowrap
+set wrap
 set linebreak
 let &showbreak=""
 set breakindent
 set nolist
 
-set wrapmargin=10
-set textwidth=0
+set conceallevel=1
+let g:tex_conceal='abdmgs'
+let g:tex_flavor='latex'
 
-let g:goyo_width = 100
-
-" Goyo remove line numbers
-autocmd User GoyoEnter nested set relativenumber
 
 " formatting options
-set formatoptions=atq1jpw
+set formatoptions=tq1jpw
 " a: enables auto-format: texwidth, if 0 use 79, or width of window.
 " t: enable auto format for text
 " c: enable auto format for comments

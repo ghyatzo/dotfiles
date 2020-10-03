@@ -5,3 +5,4 @@ atreplinit() do repl
     catch
     end
 end
+#using OhMyREPL

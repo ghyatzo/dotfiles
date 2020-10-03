@@ -7,8 +7,8 @@
 
 # ---- SYSTEM ----
 
-export PATH="$PATH:/usr/local/sbin/:$HOME/.local/bin/"
-export VISUAL="vim"
+export PATH="$HOME/.local/bin/:$PATH"
+export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export TERMINAL="kitty"
 export LANG="it_IT.UTF-8"
@@ -20,8 +20,19 @@ export XDG_CONFIG_HOME="$CONFIGDIR"
 export JULIA_NUM_THREADS=4
 
 # ---- ZSH ----
-export ZSH="$HOME/.config/oh-my-zsh"
+export ZSH="$CONFIGDIR/oh-my-zsh"
 export ZDOTDIR="$ZSH"
+
+# ---- CUPS ----
+export CUPS_CACHEDIR="$HOME/.cache/cups"
+
+# ---- PYTHON/PYENV ----
+
+export PYENV_ROOT="$HOME/.local/pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+# ---- IPYTHON ---
+export IPYTHONDIR="$CONFIGDIR/ipython"
 
 # ---- LESS ----
 export LESS=-R
@@ -39,4 +50,6 @@ export COURSES=$HOME/Current-Courses
 export SCRIPTS=$HOME/.local/bin/
 export DRIVE=$HOME/Google\ Drive/
 #export ATOM_HOME="$CONFIGDIR/atom"
+
+
 
