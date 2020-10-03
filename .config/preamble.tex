@@ -1,0 +1,204 @@
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{url}
+
+\usepackage{parskip}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[]{quoting}
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+%\usepackage[dvipsnames,table,xcdraw]{xcolor}
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb, mathtools}
+\usepackage{cancel}
+\usepackage{bm} % bold math
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{wrapfig} % allows for text wrap around figure
+
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\newcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand\K{\ensuremath{\mathbb{K}}}
+\newcommand\F{\ensuremath{\mathbb{F}}}
+\newcommand{\st}{
+    \noscript\;
+    \ifnum\currentgrouptype=16
+        \;\middle|\;
+    \else
+        \;|\;
+    \fi
+\noscript\;}
+
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
+
+% Put x\to \infty below \lim
+\let\svlim\lim\def\lim{\svlim\limits}
+
+% make implies and impledby shorter
+\let\implies\Rightarrow
+\let\impliedby\Leftarrow
+\let\iff\Leftrightarrow
+\let\epsilon\varepsilon
+
+\usepackage{stmaryrd} % for \lightning
+\newcommand\contra{\scalebox{1.5}{$\lightning$}}
+
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+
+\newcommand\hr{
+    \noindent\rule[0.5ex]{\linewidth}{0.5pt}
+}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{result}{Result}[section]
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+%% Environments
+%\makeatother
+%% For box around Definition, Theorem, \ldots
+%\makeatother
+%\usepackage{thmtools}
+%\usepackage[framemethod=TikZ]{mdframed}
+%\mdfsetup{skipabove=1em,skipbelow=0em}
+
+%\theoremstyle{definition}
+
+%\declaretheoremstyle[
+%   headfont=\bfseries\sffamily\color{ForestGreen!70!black}, bodyfont=\normalfont,
+%   mdframed={
+%       linewidth=2pt,
+%       rightline=false, topline=false, bottomline=false,
+%       linecolor=ForestGreen, backgroundcolor=ForestGreen!5,
+%   }
+%]{thmgreenbox}
+
+
+%\declaretheoremstyle[
+%   headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
+%   numbered=no,
+%   mdframed={
+%       linewidth=2pt,
+%       rightline=false, topline=false, bottomline=false,
+%       linecolor=RawSienna, backgroundcolor=RawSienna!1,
+%   },
+%   qed=\qedsymbol
+%]{thmproofbox}
+
+%\declaretheoremstyle[
+%   headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+%   mdframed={
+%       linewidth=2pt,
+%       rightline=false, topline=false, bottomline=false,
+%       linecolor=NavyBlue, backgroundcolor=NavyBlue!5,
+%   }
+%]{thmbluebox}
+
+%\declaretheoremstyle[
+%   headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+%   mdframed={
+%       linewidth=2pt,
+%       rightline=false, topline=false, bottomline=false,
+%       linecolor=NavyBlue
+%   }
+%]{thmblueline}
+
+%\declaretheoremstyle[
+%   headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
+%   mdframed={
+%       linewidth=2pt,
+%       rightline=false, topline=false, bottomline=false,
+%       linecolor=RawSienna, backgroundcolor=RawSienna!5,
+%   }
+%]{thmredbox}
+
+%\declaretheorem[style=thmproofbox, name=Proof]{replacementproof}
+%\renewenvironment{proof}[1][\proofname]{\vspace{-10pt}\begin{replacementproof}}{\end{replacementproof}}
+
+%\theoremstyle{thmgreenbox}
+%\declaretheorem[style = thmgreenbox, name = Definitie]{definitie}
+%\declaretheorem[style = thmgreenbox, name = Definition]{definition}
+%%\newtheorem[nobreak=true]{definitie}{Definitie}
+%\declaretheorem[style=thmredbox, name=Proposition]{proposition}
+%\declaretheorem[style=thmredbox, name=Theorem]{theorem}
+%\declaretheorem[style=thmredbox, name=Lemma]{lemma}
+%\declaretheorem[style=thmredbox, name=Propositie]{propositie}
+%\declaretheorem[style=thmredbox, name=Stelling]{stelling}
+%\declaretheorem[style=thmredbox, name=Eigenschap]{eigenschap}
+%\declaretheorem[style=thmredbox, name=Gevolg]{gevolg}
+%\declaretheorem[style=thmredbox, name=Wet]{wet}
+%\declaretheorem[style=thmredbox, name=Postulaat]{postulaat}
+%\declaretheorem[style=thmredbox, numbered=no, name=Corollary]{corollary}
+%\newmdtheoremenv{conclusie}{Conclusie}
+%\newmdtheoremenv{toemaatje}{Toemaatje}
+%\newmdtheoremenv{vermoeden}{Vermoeden}
+%%\newmdtheoremenv{quote}{Quote}
+%\declaretheorem[style=thmbluebox, name=Exercise, numbered=no]{exercise}
+%\declaretheorem[style=thmbluebox, name=Herhaling, numbered=no]{herhaling}
+%\declaretheorem[style=thmbluebox, name=Intermezzo, numbered=no]{intermezzo}
+%\declaretheorem[style=thmbluebox, name=Observatie, numbered=no]{observatie}
+%\declaretheorem[style=thmbluebox, name=Oefening, numbered=no]{oef}
+%\declaretheorem[style=thmbluebox, name=Opmerking, numbered=no]{opmerking}
+%\declaretheorem[style=thmbluebox, name=Fact, numbered=no]{fact}
+%\declaretheorem[style=thmgreenbox, name=Notatie, numbered=no]{notatie}
+%\declaretheorem[style=thmbluebox, name=TODO, numbered=no]{TODO}
+%\newtheorem*{praktisch}{Praktisch}
+%\newtheorem*{probleem}{Probleem}
+%\newtheorem*{terminologie}{Terminologie}
+%\newtheorem*{toepassing}{Toepassing}
+%\newtheorem*{uovt}{UOVT}
+%\newtheorem*{vb}{Voorbeeld}
+%\newtheorem*{vraag}{Vraag}
+%\newtheorem*{motivation}{Motivation}
+%\newtheorem*{erratum}{Erratum}
+%\newtheorem*{herinner}{Herinner}
+%\newtheorem*{conjectuur}{Conjectuur}
+%\newtheorem*{recall}{Recall}
+%\newtheorem*{revision}{Revision}
+
+%\newtheorem*{example}{Example}
+%\newtheorem*{notation}{Notation}
+%\newtheorem*{previouslyseen}{As previously seen}
+%\newtheorem*{remark}{Remark}
+%\newtheorem*{note}{Note}
+%\newtheorem*{problem}{Problem}
+%\newtheorem*{observe}{Observe}
+%\newtheorem*{property}{Property}
+%\newtheorem*{intuition}{Intuition}
+
+%% End example and intermezzo environments with a small diamond (just like proof
+%% environments end with a small square)
+%\usepackage{etoolbox}
+%\AtEndEnvironment{vb}{\null\hfill$\diamond$}%
+%\AtEndEnvironment{intermezzo}{\null\hfill$\diamond$}%
+%% \AtEndEnvironment{opmerking}{\null\hfill$\diamond$}%
+
+%% Fix some spacing
+%% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+%\makeatletter
+%\def\thm@space@setup{%
+%  \thm@preskip=\parskip \thm@postskip=0pt
+%}
