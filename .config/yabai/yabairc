@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# The scripting addition must be loaded manually if running Big Sur.
+# For this to work a sudoers file has been created for yabai specifically.
+# you can find it in /private/etc/sudoers.d/yabai.
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
 # --- Layout: defines the default behaviour for the new spaces (bsp or float)
 #           Can be configured for a per-space basis
 #               yabai -m config --space n layout float
@@ -27,8 +33,8 @@ yabai -m config split_ratio  0.5
 
 # --- Mouse Support
 yabai -m config mouse_modifier fn
-yabai -m config mouse_action1 move
-yabai -m config mouse_action2 resize
+yabai -m config mouse_action1 move # left-click
+yabai -m config mouse_action2 resize # right-click
 
 # autofocus: window get focused, but not raised
 # autoraise: as if it was clicked on
@@ -49,7 +55,7 @@ yabai -m config window_shadow float
 # window opacity
 # example: render all unfocused windows with 90% opacity
 yabai -m config window_opacity off
-yabai -m config window_opacity_duration 0
+yabai -m config window_opacity_duration 0.0
 yabai -m config active_window_opacity 1.0
 yabai -m config normal_window_opacity 1.0
 
@@ -57,14 +63,14 @@ yabai -m config normal_window_opacity 1.0
 #  - width has unit 1pt
 #  - colors for borders are in the format AARRGGBB with hex values
 #  - active means focused window, normal means unfocused window, insert means selected window
-yabai -m config window_border on
+yabai -m config window_border off
 yabai -m config window_border_width 2
 yabai -m config active_window_border_color  0xffc27000
 yabai -m config normal_window_border_color 0xff292929
 
 
 # statusbar
-yabai -m config external_bar main:28:0
+yabai -m config external_bar main:24:0
 
 # --- Signals
 # Flashfocus emulation, on window focus quickly change the opacity
@@ -73,20 +79,13 @@ yabai -m config external_bar main:28:0
 
 # Ubersicht bar refresh on display/space change
 # Refresh spaces widget on space change
-yabai -m signal --add event=space_changed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-spaces-jsx\"'"
-# Refresh spaces widget on display focus change
-yabai -m signal --add event=display_changed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-spaces-jsx\"'"
-# Refresh process widget on space change
-yabai -m signal --add event=space_changed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-process-jsx\"'"
-# Refresh process widget on when focused application changes
-yabai -m signal --add event=application_front_switched action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-process-jsx\"'"
-# Refresh spaces widget on when focused application changes
-yabai -m signal --add event=application_front_switched action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-spaces-jsx\"'"
+yabai -m signal --add event=space_changed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-jsx\"'"
+yabai -m signal --add event=space_changed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
 # Refresh process widget on when an application window is closed
-yabai -m signal --add event=window_destroyed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-process-jsx\"'"
-# Refresh spaces widget on when an application window is closed
-yabai -m signal --add event=window_destroyed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-spaces-jsx\"'"
-
+yabai -m signal --add event=window_destroyed action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
+yabai -m signal --add event=window_created action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
+yabai -m signal --add event=window_focused action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
+yabai -m signal --add event=window_moved action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-windows-jsx\"'"
 # --- Rules
 
 yabai -m rule --add label="spotify-fullscreen" \

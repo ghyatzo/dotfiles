@@ -42,23 +42,25 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 Plug 'lervag/vimtex'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+
 " Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 
 " Julia-vim, syntax and more!
 Plug 'JuliaLang/julia-vim'
 
-" Plug 'kana/vim-textobj-entire'
-Plug 'lifepillar/vim-mucomplete'
 
 " --- !!! COLOR SCHEMES !!! ---
 Plug 'rudrab/vim-coogle'
 Plug 'aradunovic/perun.vim'
 Plug 'kadekillary/subtle_solo'
-Plug 'nightsense/cosmic_latte'
 Plug 'lifepillar/vim-solarized8'
 Plug 'AlessandroYorba/despacio'
+Plug 'ayu-theme/ayu-vim'
 call plug#end()
 
 
@@ -122,7 +124,7 @@ set textwidth=0
 
 " ----- SEARCH ----
 set incsearch   " enables incremental search, showing matches while still typing
-set hlsearch
+set nohlsearch
 set ignorecase
 set smartcase
 set noshowmode
@@ -141,8 +143,14 @@ set splitright
 set diffopt=filler,vertical,iwhite "ignore whitespace only changes and always use vertical diffs
 
 set termguicolors
-colorscheme despacio
-let g:despacio_sunset = 1
+
+let ayucolor="mirage"  " options: light, mirage, dark(default)
+colorscheme ayu
+
+
+" colorscheme despacio
+" let g:despacio_sunset = 1
+
 " fix concealment
 highlight Conceal guifg=#87afaf guibg=NONE gui=NONE ctermfg=109 ctermbg=NONE cterm=NONE
 
@@ -164,34 +172,36 @@ set path+=**3
 set path-=/usr/include "fix
 
 " set where to look when completing
-set complete+=i,kspell
-
+"( let this be handled by mucomplete)
+set complete-=i,kspell,t
 
 
 " ---- PLUGIN SPECIFIG ----
-" python
-autocmd VimEnter * let g:python3_host_prog = system('which python')
 
-" vim-mucomplete settings
-set completeopt+=menuone
-set completeopt+=noinsert,noselect
+" vim-mucomplete settings ------------------------------------
+set completeopt+=menuone,noinsert,noselect
 set shortmess+=c
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#tab_when_no_results = 1
-let g:mucomplete#completion_delay =1
+let g:mucomplete#completion_delay = 0
 
 let g:mucomplete#chains = {
-    \ 'default' : ['path', 'omni', 'keyn', 'uspl'],
-    \ 'vim' : ['path', 'cmd', 'keyn'],
-    \ 'tex' : ['path', 'keyp', 'ulti', 'uspl']
+    \ 'default' : ['path', 'omni', 'incl', 'line'],
+    \ 'vim' : ['path', 'cmd', 'incl'],
+    \ 'tex' : ['vsnip','path', 'line']
     \ }
 
-" Lf file manager
+" Vsnip ---------------------------------------------------
+let g:vsnip_snippet_dir = expand('~/.config/nvim/ftplugin')
+let g:vsnip_choice_delay = 500
+let g:vsnip_namespace = ''
+
+" Lf file manager ---------------------------------------
 let g:lf_map_keys=0
 let g:NERDTreeHijackNetrw=0 "use lf instead of nerd tree when opening a directory
 let g:lf_replace_netrw=1
 
-" Goyo and limelight
+" Goyo and limelight ------------------------------------------
 " let g:goyo_width = '80%'
 let g:limelight_default_coefficient = 0.8
 
@@ -199,21 +209,14 @@ autocmd! User GoyoEnter set nu rnu
 autocmd! User GoyoLeave Limelight!
     \ | highlight Conceal guifg=#87afaf guibg=NONE gui=NONE ctermfg=109 ctermbg=NONE cterm=NONE
 
-
-" vimtex
+" vimtex ---------------------------------------------------------
 let g:vimtex_view_method='skim'
 let g:vimtex_quickfix_mode=0
 let g:vimtex_complete_enabled=1
 
-" ultisnips
-let g:UltiSnipsExpandTrigger = "<f5>"        " Do not use <tab>
-let g:UltiSnipsJumpForwardTrigger = "<c-b>"  " Do not use <c-j>
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "ftplugin"]
-
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 
-" Loads all the rcfiles
+" Loads all the rcfiles ---------------------------------------------------------------
 function! s:SourceConfigFilesIn(directory)
   let directory_splat = '~/.vim/' . a:directory . '/*'
   for config_file in split(glob(directory_splat), '\n')
@@ -222,7 +225,6 @@ function! s:SourceConfigFilesIn(directory)
     endif
   endfor
 endfunction
-
 
 call s:SourceConfigFilesIn('rcfiles')
 

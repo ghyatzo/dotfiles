@@ -1,0 +1,14 @@
+{
+    "Snippet": {
+        "prefix" : ["_snippet"],
+        "body" : [
+            "\"${1:title}\": {",
+            "\t\"prefix\": [\"$2\"],",
+            "\t\"body\": [\n\t\t\"$3\"\n\t],",
+            "\t\"description\": \"$4\"",
+            "},",
+            "$0"
+        ],
+        "description" : "snippet skeleton"
+    }
+}

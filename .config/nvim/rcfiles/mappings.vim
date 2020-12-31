@@ -39,56 +39,49 @@ map <F2> :if exists("g:syntax_on") <Bar>
         \   syntax off <Bar>
         \ else <Bar>
         \   syntax enable <Bar>
+        \ endif<CR>
+
+" show which syntax group the cursor is in.
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
         \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
         \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" ---- PLUGINS
-" Toggle goyo
+" ---- PLUGINS --------------------------------------------------
+" Goyo {{
+" toggle
 nnoremap <leader>f :Goyo<CR>
 nnoremap <leader>F :Goyo \| Limelight!!<CR>
+"}}
 
-" Nerdtree specific
+
+" Nertree {{
 map <leader>\ :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" }}
 
-" Lf File manager plugin
+
+" LF {{
 map <leader>lf :Lf<CR>
 map <leader>t :LfNewTab<CR>
+"}}
 
-" vim-mucomplete
-let g:mucomplete#no_mappings = 1 "let me do the mappings to work with ultisnipts (see below)
-"imap <expr> <right> mucomplete#extend_fwd("\<right>")
-"imap <expr> <left> mucomplete#extend_bwd("\<left>")
-if !hasmapto('<plug>(MUcompleteBwd)', 'i')
-    imap <unique> <s-tab> <plug>(MUcompleteBwd)
-endif
+" MuComplete {{
+let g:mucomplete#no_mappings = 1
 
-    " ultisnipts
-    " compatibility with i_CTRL-X_CTRL-K behaviour
-inoremap <c-x><c-k> <c-x><c-k>
+imap <unique> <c-j> <plug>(MUcompleteCycFwd)
+imap <unique> <c-h> <plug>(MUcompleteCycBwd)
 
-    "compatibility with mucomplete
-let g:ulti_expand_or_jump_res = 0
-fun! TryUltiSnips()
-    if !pumvisible() "with popup menu open let tab move down
-        call UltiSnips#ExpandSnippetOrJump()
-    endif
-    return ''
-endf
-fun! TryMUcomplete()
-    return g:ulti_expand_or_jump_res ? "" : "\<plug>(MUcompleteFwd)"
-endf
 
-inoremap <plug>(TryUlti) <c-r>=TryUltiSnips()<cr>
-imap <expr> <silent> <plug>(TryMU) TryMUcomplete()
-imap <expr> <silent> <tab> "\<plug>(TryUlti)\<plug>(TryMU)"
+" VSnips -- compatibility with mucomplete {{
+" Jump forward or backward
 
-inoremap <silent> <expr> <plug>MyCR mucomplete#ultisnips#expand_snippet("\<cr>")
-imap <cr> <plug>MyCR
+imap <expr> <Tab> pumvisible() ? "\<Plug>(MUcompleteFwd)" : (vsnip#available(1) ? "\<Plug>(vsnip-expand-or-jump)" : "<Tab>")
+smap <expr> <Tab> pumvisible() ? "\<Plug>(MUcompleteFwd)" : (vsnip#available(1) ? "\<Plug>(vsnip-expand-or-jump)" : "<Tab>")
 
-" " vim-latex-live-preview
-" nmap <leader>ll :LLPStartPreview<CR>
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+
+" }}
 
 " ---- MISC
 

@@ -24,8 +24,6 @@ set formatoptions=tq1jpw
 " p: don't break lines at single spaces after periods.
 " w: if a line ends by a whitespace it indicates that the paragraph continues in the next line.
 
-
-
 " label cycling if \label{fig:something} then on the ref
 " \ref{fig: <C-n> will cycle through all the figures labels yay
 set iskeyword+=:
@@ -41,6 +39,30 @@ noremap <leader>p    :w<CR> :silent exe "! vim_open_skim.sh " . shellescape(expa
 
 " Compile the document
 noremap <leader>b    :! vim_build_tex.sh %<CR>
+
+
+
+
+" Figure out if we are in a mathzone
+fun! IsMathZone()
+    let l:mathZones = ['texMathZone', 'texMathZoneEnv', 'texMathZoneEnvStarred', 'texMathZoneX', 'texMathZoneXX', 'texMathZoneEnsured']
+    " let l:ignoreMathZone = ['texMathTextArg']
+
+    let l:mathZonesIds = map(l:mathZones, { _, val -> hlID(val) })
+    " let l:ignoreMathZoneIds = map(l:ignoreMathZone,{ _, val -> hlID(val) })
+
+    " let l:synstackIDs = synstack(line('.'), col('.') - (col('.') >= 2 ? 1 : 0))
+
+    " echomsg( 'synID :' . synID(line('.'), col('.') - (col('.') >= 2 ? 1 : 0), 1) . ' - ' .  synIDattr(synID(line('.'), col('.') - (col('.') >= 2 ? 1 : 0), 1), 'name') )
+    " for i in l:mathZonesIds
+    "     echoms("\t".i)
+    " endfor
+    " echomsg('\tIsMathZone :' . index(l:mathZonesIds, synID(line('.'), col('.'), 1)) == -1 ? 0 : 1 )
+    return ( index(l:mathZonesIds, synID(line('.'), col('.'), 1)) == -1  ) ? v:false : v:true
+endfun
+
+
+
 
 "reformat lines {{{
 fun! TeX_fmt()
@@ -67,4 +89,6 @@ fun! TeX_fmt()
     endif
 endfun
 
-nmap Q :call tex_fmt()<CR>
+nmap Q :call TeX_fmt()<CR>
+
+

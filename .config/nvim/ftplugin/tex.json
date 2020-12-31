@@ -1,0 +1,221 @@
+{
+    "Homework": {
+        "prefix": ["_homework"],
+        "body": [
+            "\\documentclass[a4paper]{amsart}",
+            "\\input{/Users/ghyatzo/.config/preamble.tex}",
+            "\\author{Camillo Schenone}",
+            "\\title{",
+            "\t$1 \\\\",
+            "\t\\large $2}",
+            "\n",
+            "\\begin{document}",
+            "\\maketitle",
+            "$0\n",
+            "\\end{document}"
+        ],
+        "description": "Homework template"
+    },
+
+    "Figure" : {
+        "prefix" : ["_figure"],
+        "body": [
+            "\\begin{figure}[${1:h}]",
+            "\t\\centering",
+            "\t\\includegraphics[width=${2:0.8}\\textwidth]{$3}",
+            "\t\\caption{$4}",
+            "\\end{figure}",
+            "$0"
+        ],
+        "description": "Figure template"
+    },
+
+    "Subfigure": {
+        "prefix": ["_subfig"],
+        "body": [
+            "\\begin{subfigure}[$1]\\{${2:0.4}\\textwidth\\}",
+            "\t\\includegraphics[width=\\textwidth]{$3}",
+            "\t\\label{fig:$4}",
+            "\\end{subfigure}$0"
+        ],
+        "description": "Subfigure template"
+    },
+
+    "Environment": {
+        "prefix": ["beg"],
+        "body": [
+            "\\begin{$1}",
+            "\t$0",
+            "\\end{$1}"
+        ],
+        "description": "arbitrary Environment"
+    },
+
+    "Section": {
+        "prefix": ["sec"],
+        "body":
+            "\\section{$1}\n$0"
+        ,
+        "description": "section"
+    },
+
+    "Section*": {
+        "prefix": ["seC"],
+        "body": [
+            "\\section*{$1}\n$0"
+        ],
+        "description": "unnumbered section"
+    },
+
+    "Subsection": {
+        "prefix": ["ssec"],
+        "body": [
+            "\\subsection{$1}\n$0"
+        ],
+        "description": "Subsection"
+    },
+
+    "Subsection*": {
+        "prefix": ["sseC"],
+        "body": [
+            "\\subsection*{$1}\n$0"
+        ],
+        "description": "unnumbered subsection"
+    },
+
+    "Paragraph": {
+        "prefix": ["par"],
+        "body": [
+            "\\paragraph{$1}\n$0"
+        ],
+        "description": "Paragraph"
+    },
+
+    "Subparagraph": {
+        "prefix": ["spar"],
+        "body": [
+            "\\subparagraph{$1}\n$0"
+        ],
+        "description": "Subparagraph"
+    },
+
+    "2 Cases Function": {
+        "prefix": ["2cases"],
+        "body": [
+            "\\begin{cases}",
+            "\t$1 & $2 \\\\",
+            "\t$3 & $4",
+            "\\end{cases}\n$0"
+        ],
+        "description": "Piecewise function with two Cases"
+    },
+
+    "3 cases Function": {
+        "prefix": ["3cases"],
+        "body": [
+            "\\begin{cases}",
+            "\t$1 & $2 \\\\",
+            "\t$3 & $4 \\\\",
+            "\t$5 & $6",
+            "\\end{cases}\n$0"
+        ],
+        "description": "Piecewise Function with three Cases"
+    },
+
+
+
+    "Left( Right)": {
+        "prefix": ["lr("],
+        "body": ["\\left( ${1:$TM_SELECTED_TEXT \\right) $0"],
+        "description": "dynamic size parenthesis"
+    },
+
+
+    "Left| Right|": {
+        "prefix": ["lr|"],
+        "body": ["\\left\\| ${1:$TM_SELECTED_TEXT} \\right\\| $0"],
+        "description": "dynamic size vertical bars"
+    },
+
+    "Left[ Right]": {
+        "prefix": ["lr["],
+        "body": ["\\left[ ${1:$TM_SELECTED_TEXT} \\right] $0"],
+        "description": "dynamic size square parenthesis"
+    },
+
+    "Left{ Right}": {
+        "prefix": ["lr{"],
+            "body": ["\\left\\{ ${1:$TM_SELECTED_TEXT} \\right\\} $0"],
+            "description": "dynamic size curly brace's"
+    },
+
+    "Left< Right>": {
+        "prefix": ["lra"],
+        "body": ["\\left< ${1:$TM_SELECTED_TEXT} \\right> $0"],
+        "description": "dynamic size angular paranthesis"
+    },
+
+    "()": {
+        "prefix": ["()"],
+        "body": ["($1) $0"],
+        "description": "left and right parenthesis, tabstop in the middle"
+    },
+
+    "[]": {
+        "prefix": ["[]"],
+        "body": ["[$1] $0"],
+        "description": "square bracers, tabstop in the middle"
+    },
+
+    "Inline Math": {
+        "prefix": ["mk"],
+        "body": "\\$$1\\$$0",
+        "description": "inline math"
+    },
+
+    "Display Math": {
+        "prefix": ["dm"],
+        "body": [
+            "\\[",
+            "\t$1",
+            ".\\] $0"],
+        "description": "display math"
+    },
+
+    "Text Italics": {
+        "prefix": ["ttit"],
+        "body": ["\\textit{$1} $0"],
+        "description": "text in italics"
+    },
+
+    "Text Bold": {
+        "prefix": ["ttbf"],
+        "body": ["\\textbf{$1} $0"],
+        "description": "text in bold"
+    },
+
+    "Infinity": {
+        "prefix": ["ooo"],
+        "body": ["\\infty"],
+        "description": "infinity sign"
+    },
+
+    "Dots": {
+        "prefix": ["..."],
+        "body": ["\\ldots"],
+        "description": "Dots"
+    },
+
+    "Prova": {
+        "prefix": ["test"],
+        "body": [
+            "${VIM:IsMathZone()?\"Helloooooo\":\"test\"}"
+        ],
+        "description": " MATH MODE ONLY -this is just a test"
+    }
+
+
+}
+
+
+

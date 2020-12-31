@@ -48,7 +48,7 @@ alias _='sudo'
 alias please='sudo '
 #alias htop='sudo htop' # htop requires root to run properly, and i trust it...
 
-# Get week number, day number, day of the week, month, year
+# Get week ea:qumber, day number, day of the week, month, year
 alias week='date +%V'
 alias day='date +%j'
 alias dayOfTheWeek='date +%A'

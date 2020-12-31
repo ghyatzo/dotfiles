@@ -16,6 +16,27 @@ export CONFIGDIR="$HOME/.config"
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 export XDG_CONFIG_HOME="$CONFIGDIR"
 
+# ---- COMPILER FLAGS ---
+export SYSROOT=$(xcrun --sdk macosx --show-sdk-path)
+export CLFLAGS="-isysroot ${SYSROOT} -I/usr/include"
+export LDFLAGS="-L$SYSROOT/usr/lib"
+export CPPFLAGS="${CFLAGS}"
+
+# export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+# export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+
+# export LDFLAGS="-L/usr/local/opt/openldap/lib"
+# export CPPFLAGS="-I/usr/local/opt/openldap/include"
+
+# export LDFLAGS="-L/usr/local/opt/qt/lib"
+# export CPPFLAGS="-I/usr/local/opt/qt/include"
+
+# export LDFLAGS="-L/usr/local/opt/readline/lib"
+# export CPPFLAGS="-I/usr/local/opt/readline/include"
+
+# export LDFLAGS="-L$(xcrun --show-sdk-path)/usr/lib"
+# export CPPFLAGS="-I$(xcrun --show-sdk-path)/usr/include"
+
 # ---- JULIA ----
 export JULIA_NUM_THREADS=4
 

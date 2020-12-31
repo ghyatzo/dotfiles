@@ -143,6 +143,7 @@ alt - 0x1B : yabai -m window --toggle split # alt - meno
 # float/borde/sticky
 alt - space : yabai -m window --toggle float
 alt - tab : yabai -m window --toggle sticky
+shift + alt - space : yabai -m space --layout float
 
 # floating windows can be moved by rel coord or abs ones
 #   to (100,200)
