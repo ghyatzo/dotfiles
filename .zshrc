@@ -30,9 +30,9 @@ plugins=(
 
 # Rbenv shims initialization
 eval "$(rbenv init -)"
-
 # pyenv shims initialization
 eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"

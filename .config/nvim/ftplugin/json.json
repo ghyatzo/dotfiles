@@ -1,14 +1,36 @@
 {
     "Snippet": {
-        "prefix" : ["_snippet"],
+        "prefix" : ["_snip"],
         "body" : [
             "\"${1:title}\": {",
             "\t\"prefix\": [\"$2\"],",
             "\t\"body\": [\n\t\t\"$3\"\n\t],",
             "\t\"description\": \"$4\"",
-            "},",
+            "},\n",
             "$0"
         ],
         "description" : "snippet skeleton"
+    },
+
+    "Math Snippet": {
+        "prefix" : ["_mathsnip"],
+        "body" : [
+            "\"${1:title}\": {",
+            "\t\"prefix\": [\"$2\"],",
+            "\t\"body\": [\n\t\t\"\\${VIM: IsMathZone() ? '$3' : '$2'}\"\n\t],",
+            "\t\"description\": \"MATH - $4\"",
+            "},\n",
+            "$0"
+        ],
+        "description" : "snippet skeleton"
+    },
+
+    "Math_mode": {
+        "prefix": ["math()"],
+        "body": [
+            "\\${VIM: IsMathZone() ? '$1' : '$2'}"
+        ],
+        "description": "math mode context"
     }
+
 }

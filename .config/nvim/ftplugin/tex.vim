@@ -6,6 +6,8 @@ set linebreak
 let &showbreak=""
 set breakindent
 set nolist
+set spell
+let g:tex_comment_nospell=1
 
 set conceallevel=1
 let g:tex_conceal='abdmgs'
@@ -45,20 +47,24 @@ noremap <leader>b    :! vim_build_tex.sh %<CR>
 
 " Figure out if we are in a mathzone
 fun! IsMathZone()
-    let l:mathZones = ['texMathZone', 'texMathZoneEnv', 'texMathZoneEnvStarred', 'texMathZoneX', 'texMathZoneXX', 'texMathZoneEnsured']
+    let l:mathZones = ['texMathZone', 'texMathZoneEnv', 'texMathZoneEnvStarred', 'texMathZoneX', 'texMathZoneXX', 'texMathZoneEnsured', 'texMathDelimZone']
     " let l:ignoreMathZone = ['texMathTextArg']
 
     let l:mathZonesIds = map(l:mathZones, { _, val -> hlID(val) })
-    " let l:ignoreMathZoneIds = map(l:ignoreMathZone,{ _, val -> hlID(val) })
+    " let l:ignoreMathZoneId = hlID('texMathTextArg')
 
     " let l:synstackIDs = synstack(line('.'), col('.') - (col('.') >= 2 ? 1 : 0))
 
-    " echomsg( 'synID :' . synID(line('.'), col('.') - (col('.') >= 2 ? 1 : 0), 1) . ' - ' .  synIDattr(synID(line('.'), col('.') - (col('.') >= 2 ? 1 : 0), 1), 'name') )
-    " for i in l:mathZonesIds
-    "     echoms("\t".i)
-    " endfor
-    " echomsg('\tIsMathZone :' . index(l:mathZonesIds, synID(line('.'), col('.'), 1)) == -1 ? 0 : 1 )
-    return ( index(l:mathZonesIds, synID(line('.'), col('.'), 1)) == -1  ) ? v:false : v:true
+"     echomsg( 'synID (-1) :' . synID(line('.'), col('.') - (col('.') >= 2 ? 1 : 0), 1) . ' - ' .  synIDattr(synID(line('.'), col('.') - (col('.') >= 2 ? 1 : 0), 1), 'name') )
+"     echomsg( 'synID :' . synID(line('.'), col('.'), 1) . ' - ' . synIDattr(synID(line('.'), col('.'), 1), 'name') )
+"     for i in synstack(line('.'), col('.'))
+"         echomsg(i)
+"     endfor
+
+
+
+    " echomsg('\tIsMathZone :' . index(l:mathZonesIds, synID(line('.'), col('.')-1, 1)) == -1 ? 0 : 1 )
+    return ( index(l:mathZonesIds, reverse(synstack(line('.'), col('.')))[0]) == -1  ) ? v:false : v:true
 endfun
 
 

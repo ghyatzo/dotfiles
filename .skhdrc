@@ -57,8 +57,8 @@ ctrl + alt - x : yabai -m space --mirror x-axis
 ctrl + alt - y : yabai -m space --mirrot y-axis
 
 # layout
-ctrl + alt - b : yabai -m space --layout bsp
-ctrl + alt - f : yabai -m space --layout float
+# ctrl + alt - b : yabai -m space --layout bsp
+# ctrl + alt - f : yabai -m space --layout float
 
 # pads and gaps
 # ctrl - alt - p : yabai -m space --toggle padding
@@ -144,6 +144,7 @@ alt - 0x1B : yabai -m window --toggle split # alt - meno
 alt - space : yabai -m window --toggle float
 alt - tab : yabai -m window --toggle sticky
 shift + alt - space : yabai -m space --layout float
+shift + ctrl - space : yabai -m space --layout bsp
 
 # floating windows can be moved by rel coord or abs ones
 #   to (100,200)

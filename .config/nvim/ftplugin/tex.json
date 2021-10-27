@@ -6,7 +6,7 @@
             "\\input{/Users/ghyatzo/.config/preamble.tex}",
             "\\author{Camillo Schenone}",
             "\\title{",
-            "\t$1 \\\\",
+            "\t$1 \\\\\\",
             "\t\\large $2}",
             "\n",
             "\\begin{document}",
@@ -33,7 +33,7 @@
     "Subfigure": {
         "prefix": ["_subfig"],
         "body": [
-            "\\begin{subfigure}[$1]\\{${2:0.4}\\textwidth\\}",
+            "\\begin{subfigure}[$1]{${2:0.4}\\textwidth}",
             "\t\\includegraphics[width=\\textwidth]{$3}",
             "\t\\label{fig:$4}",
             "\\end{subfigure}$0"
@@ -103,7 +103,7 @@
         "prefix": ["2cases"],
         "body": [
             "\\begin{cases}",
-            "\t$1 & $2 \\\\",
+            "\t$1 & $2 \\\\\\",
             "\t$3 & $4",
             "\\end{cases}\n$0"
         ],
@@ -114,15 +114,13 @@
         "prefix": ["3cases"],
         "body": [
             "\\begin{cases}",
-            "\t$1 & $2 \\\\",
-            "\t$3 & $4 \\\\",
+            "\t$1 & $2 \\\\\\",
+            "\t$3 & $4 \\\\\\",
             "\t$5 & $6",
             "\\end{cases}\n$0"
         ],
         "description": "Piecewise Function with three Cases"
     },
-
-
 
     "Left( Right)": {
         "prefix": ["lr("],
@@ -167,19 +165,180 @@
         "description": "square bracers, tabstop in the middle"
     },
 
+
+    "Implies": {
+        "prefix": ["=>"],
+        "body": [
+            "\\implies"
+        ],
+        "description": "Implies"
+    },
+
+    "Impliedby": {
+        "prefix": ["=<"],
+        "body": [
+            "\\impliedby"
+        ],
+        "description": "Impliedby"
+    },
+
+    "IFF": {
+        "prefix": ["iff"],
+        "body": [
+            "${VIM: IsMathZone() ? '\\iff' : 'iff'}"
+        ],
+        "description": "MATH - If and only if"
+    },
+
+    "Equals Tabbed": {
+        "prefix": ["=="],
+        "body": [
+            "&= $1 \\\\\\"
+        ],
+        "description": "tabbed Equals"
+    },
+
+    "Not Equal": {
+        "prefix": ["!="],
+        "body": [
+            "\\neq"
+        ],
+        "description": "Not Equal"
+    },
+
+    "Less Than": {
+        "prefix": ["<="],
+        "body": [
+            "\\leq"
+        ],
+        "description": "leq"
+    },
+
+    "Greater Than": {
+        "prefix": [">="],
+        "body": [
+            "\\geq"
+        ],
+        "description": "geq"
+    },
+
+    "Exists": {
+        "prefix": ["EE"],
+        "body": [
+            "${VIM: IsMathZone() ? '\\exists' : 'EE'}"
+        ],
+        "description": "MATH - Exists"
+    },
+
+    "For All": {
+        "prefix": ["AA"],
+        "body": [
+            "${VIM: IsMathZone() ? '\\,\\forall' : 'AA'}"
+        ],
+        "description": "MATH - For All"
+    },
+
+    "To": {
+         "prefix": ["->"],
+         "body": [
+             "${VIM: IsMathZone() ? '\\to'  : '->0'}"
+         ],
+         "description": "MATH - to"
+    },
+
+    "Left Right Arrow": {
+        "prefix": ["<->"],
+         "body": [
+             "${VIM: IsMathZone() ? $0'\\leftrightarrow' : 'lrarrow'}"
+         ],
+         "description": "MATH - left right arrow"
+     },
+
+    "Maps To": {
+         "prefix": ["!>"],
+         "body": [
+             "${VIM: IsMathZone() ? '\\mapsto' : '!>'}"
+         ],
+         "description": "MATH - maps to"
+     },
+
+     "Composition": {
+         "prefix": ["comp"],
+         "body": [
+             "${VIM: IsMathZone() ? '\\circ' : 'comp'}"
+         ],
+         "description": "MATH - composition"
+     },
+
+     "Isomorphic": {
+         "prefix": ["iso"],
+         "body": [
+             "${VIM: IsMathZone() ? '\\cong' : 'iso'}"
+         ],
+         "description": "MATH - isomorphic"
+     },
+
+     "Homotopic": {
+         "prefix": ["_hom"],
+         "body": [
+             "${VIM: IsMathZone() ? '\\simeq' : 'hom'}"
+         ],
+         "description": "MATH - homotopic"
+     },
+
+     "Subscript": {
+         "prefix": ["__"],
+         "body": [
+             "_{$1}$0"
+         ],
+         "description": "add a quick subscript"
+     },
+
     "Inline Math": {
         "prefix": ["mk"],
-        "body": "\\$$1\\$$0",
+        "body": "\\$ $1 \\$$0",
         "description": "inline math"
+    },
+
+    "prova": {
+        "prefix": ["test"],
+        "body": [
+            "${VIM: $0 . IsMathZone() . '$1'}"
+        ],
+        "description": ""
     },
 
     "Display Math": {
         "prefix": ["dm"],
         "body": [
             "\\[",
-            "\t$1",
-            ".\\] $0"],
+            "\t$1 ",
+            "\\] $0"],
         "description": "display math"
+    },
+
+    "Fraction": {
+        "prefix": ["//"],
+        "body": [
+            "\\frac{$1}{$2}$0"
+        ],
+        "description": "quick fraction notation"
+    },
+
+    "Summation": {
+        "prefix": ["_sum"],
+        "body": [
+            "\\sum_{$1}^{$2}$0"
+        ],
+        "description": "summation sign"
+    },
+
+    "Partial": {
+        "prefix": ["del"],
+        "body": [
+            "\\partial"
+        ],
+        "description": "partial derivatives"
     },
 
     "Text Italics": {
@@ -194,6 +353,16 @@
         "description": "text in bold"
     },
 
+    "Math Cal": {
+        "prefix": ["_mc"],
+        "body": [
+            "\\mathcal{$1}$0"
+        ],
+        "description": "use the mathcal"
+    },
+
+
+
     "Infinity": {
         "prefix": ["ooo"],
         "body": ["\\infty"],
@@ -204,15 +373,8 @@
         "prefix": ["..."],
         "body": ["\\ldots"],
         "description": "Dots"
-    },
-
-    "Prova": {
-        "prefix": ["test"],
-        "body": [
-            "${VIM:IsMathZone()?\"Helloooooo\":\"test\"}"
-        ],
-        "description": " MATH MODE ONLY -this is just a test"
     }
+
 
 
 }

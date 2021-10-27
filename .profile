@@ -7,7 +7,8 @@
 
 # ---- SYSTEM ----
 
-export PATH="$HOME/.local/bin/:$PATH"
+export LOCAL="$HOME/.local"
+export PATH="$LOCAL/bin/:$PATH"
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export TERMINAL="kitty"
@@ -48,9 +49,9 @@ export ZDOTDIR="$ZSH"
 export CUPS_CACHEDIR="$HOME/.cache/cups"
 
 # ---- PYTHON/PYENV ----
-
-export PYENV_ROOT="$HOME/.local/pyenv"
+export PYENV_ROOT="$LOCAL/pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 
 # ---- IPYTHON ---
 export IPYTHONDIR="$CONFIGDIR/ipython"
@@ -68,7 +69,7 @@ export LESS_TERMCAP_us=$'\E[1;32m'
 # ---- CUSTOM LOCATIONS ----
 export BOOKS=$HOME/Google\ Drive/Master/Books
 export COURSES=$HOME/Current-Courses
-export SCRIPTS=$HOME/.local/bin/
+export SCRIPTS=$LOCAL/bin/
 export DRIVE=$HOME/Google\ Drive/
 #export ATOM_HOME="$CONFIGDIR/atom"
 

@@ -130,7 +130,7 @@ set smartcase
 set noshowmode
 
 " ---- SPELLING ----
-setlocal spell
+setlocal nospell
 set spelllang=it,en_gb
 
 " ---- VISUALS ---
@@ -142,14 +142,14 @@ set splitbelow
 set splitright
 set diffopt=filler,vertical,iwhite "ignore whitespace only changes and always use vertical diffs
 
-set termguicolors
+" set termguicolors
 
-let ayucolor="mirage"  " options: light, mirage, dark(default)
-colorscheme ayu
+" let ayucolor="dark"  " options: light, mirage, dark(default)
+" colorscheme ayu
 
 
-" colorscheme despacio
-" let g:despacio_sunset = 1
+colorscheme despacio
+let g:despacio_sunset = 1
 
 " fix concealment
 highlight Conceal guifg=#87afaf guibg=NONE gui=NONE ctermfg=109 ctermbg=NONE cterm=NONE
@@ -188,7 +188,7 @@ let g:mucomplete#completion_delay = 0
 let g:mucomplete#chains = {
     \ 'default' : ['path', 'omni', 'incl', 'line'],
     \ 'vim' : ['path', 'cmd', 'incl'],
-    \ 'tex' : ['vsnip','path', 'line']
+    \ 'tex' : ['vsnip','path']
     \ }
 
 " Vsnip ---------------------------------------------------
@@ -202,7 +202,7 @@ let g:NERDTreeHijackNetrw=0 "use lf instead of nerd tree when opening a director
 let g:lf_replace_netrw=1
 
 " Goyo and limelight ------------------------------------------
-" let g:goyo_width = '80%'
+let g:goyo_height = 90
 let g:limelight_default_coefficient = 0.8
 
 autocmd! User GoyoEnter set nu rnu

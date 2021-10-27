@@ -97,4 +97,4 @@ alias updatedb='/usr/libexec/locate.updatedb'
 alias DSCleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
 # Lets pyenv and Homebrew to play nice with eachother. Otherwise, any python dependent package from homebrew might be compiled against a python version managed by pyenv.
-alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+#alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
