@@ -160,5 +160,5 @@ shift + ctrl - space : yabai -m space --layout bsp
 # yabai -m window --resize abs:500:800
 
 # --- OPEN STUFF
-cmd + shift - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance --instance-group=1 --directory ~
+cmd + shift - return : (/Applications/Kitty.app/Contents/MacOS/kitty --single-instance --instance-group=1 --directory ~ &)
 cmd - 0x32 : /Applications/Kitty.app/Contents/MacOS/kitty --title notepad --single-instance --instance-group=2 --hold --directory ~
